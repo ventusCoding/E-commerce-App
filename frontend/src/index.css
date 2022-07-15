@@ -9,3 +9,8 @@ h3 {
 .rating span {
   margin: 0.1rem;
 }
+
+a:-webkit-any-link {
+    text-decoration: none;
+    color: inherit;
+  }
