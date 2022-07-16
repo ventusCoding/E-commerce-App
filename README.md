@@ -31,13 +31,13 @@ npm i --prefix frontend
 - To run only the backend project
 
 ```bash
-npm run dev
+npm run server
 ```
 
 - To run only the frontend project
 
 ```bash
-npm run dev
+npm run client
 ```
 
 - To run the backend & the frontend concurrently
