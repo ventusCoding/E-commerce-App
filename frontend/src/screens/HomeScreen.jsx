@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, {  useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import Product from "../components/Product";
-import axios from "axios";
 import { bindActionCreators } from "redux";
 import { useSelector, useDispatch } from "react-redux";
 import * as actionCreators from "../store/actions/index";
@@ -9,7 +8,6 @@ import Loader from "../components/Loader";
 import Message from "../components/Message";
 
 const HomeScreen = () => {
-  // const [products, setProducts] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -19,7 +17,6 @@ const HomeScreen = () => {
 
   useEffect(() => {
     fetchProducts();
-    // setProducts(state.products.products);
   }, [products.length]);
 
   return (
