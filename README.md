@@ -45,3 +45,16 @@ npm run client
 ```bash
 npm run dev
 ```
+
+## to import or delete dummy data
+- import data
+
+```bash
+npm run data:import
+```
+
+- delete data
+
+```bash
+npm run data:destroy
+```
