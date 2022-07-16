@@ -5,6 +5,8 @@ import axios from "axios";
 import { bindActionCreators } from "redux";
 import { useSelector, useDispatch } from "react-redux";
 import * as actionCreators from "../store/actions/index";
+import Loader from "../components/Loader";
+import Message from "../components/Message";
 
 const HomeScreen = () => {
   // const [products, setProducts] = useState([]);
@@ -24,9 +26,9 @@ const HomeScreen = () => {
     <div>
       <h1>Latest Products</h1>
       {loading ? (
-        <h2>Loading ...</h2>
+        <Loader />
       ) : error ? (
-        <h3>{error}</h3>
+        <Message variant="danger">{error}</Message>
       ) : (
         <Row>
           {products.map((product) => (
