@@ -48,16 +48,13 @@ const addCartSuccess = (state, action) => {
   const cartItems = state.cartItems.filter((cart) => cart.id !== newCart.id);
 
   cartItems.push(newCart);
-
-  console.log(cartItems);
-  console.log(newCart);
   
 
   localStorage.setItem("cartItems", JSON.stringify(cartItems));
 
   return updateObject(state, {
     loading: false,
-    cartItems: state.cartItems.concat(newCart),
+    cartItems: cartItems,
   });
 };
 
