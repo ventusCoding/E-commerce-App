@@ -12,11 +12,11 @@ const CartScreen = () => {
 
   const { cartItems, error, loading } = useSelector((state) => state.cart);
 
-  const { removeCart } = bindActionCreators(actionCreators, dispatch);
+  const { removeCart,updateCartQty } = bindActionCreators(actionCreators, dispatch);
 
   return (
     <Row>
-      <Col md={8}>
+      <Col style={{ width: "100%" }} md={8}>
         <h1>Shopping Cart</h1>
         {cartItems.length === 0 ? (
           <Message>
@@ -34,18 +34,16 @@ const CartScreen = () => {
                     <Link to={`/product/${item.product}`}>{item.name}</Link>
                   </Col>
                   <Col md={2}>${item.price}</Col>
-                  <Col md={2}>
-                    <Form.Control
-                      as="select"
-                      value={item.qty}
-                      onChange={(e) => {}}
-                    >
+                  <Col md={3}>
+                    <Form.Select value={item.qty} onChange={(e) => {
+                      updateCartQty(item, e.target.value);
+                    }}>
                       {[...Array(item.countInStock).keys()].map((x) => (
                         <option key={x + 1} value={x + 1}>
                           {x + 1}
                         </option>
                       ))}
-                    </Form.Control>
+                    </Form.Select>
                   </Col>
                   <Col md={2}>
                     <Button

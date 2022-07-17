@@ -4,9 +4,41 @@ import { updateObject } from "../../helpers/utility";
 //************** Initial State ********************/
 
 const initialState = {
-  cartItems: localStorage.getItem("cartItems") ? JSON.parse(localStorage.getItem("cartItems")) : [],
+  cartItems: localStorage.getItem("cartItems")
+    ? JSON.parse(localStorage.getItem("cartItems"))
+    : [],
   loading: false,
   error: null,
+};
+
+//************** UPDATE CART QTY ********************/
+
+const updateCartQtyStart = (state, action) => {
+  return updateObject(state, {
+    loading: true,
+  });
+};
+
+const updateCartQtySuccess = (state, action) => {
+//update qty in state.cartItems
+  const newCart = state.cartItems.map((cart) => {
+    if (cart.id === action.cart.id) {
+      return action.cart;
+    }
+    return cart;
+  }
+  );
+
+  localStorage.setItem("cartItems", JSON.stringify(newCart));
+
+  return updateObject(state, {
+    cartItems: newCart,
+    loading: false,
+  });
+};
+
+const updateCartQtyFail = (state, action) => {
+  return updateObject(state, { error: action.error, loading: false });
 };
 
 //************** REMOVE CART ********************/
@@ -29,7 +61,6 @@ const removeCartSuccess = (state, action) => {
 };
 
 const removeCartFail = (state, action) => {
-
   return updateObject(state, { error: action.error, loading: false });
 };
 
@@ -48,7 +79,6 @@ const addCartSuccess = (state, action) => {
   const cartItems = state.cartItems.filter((cart) => cart.id !== newCart.id);
 
   cartItems.push(newCart);
-  
 
   localStorage.setItem("cartItems", JSON.stringify(cartItems));
 
@@ -61,7 +91,6 @@ const addCartSuccess = (state, action) => {
 const addCartFail = (state, action) => {
   return updateObject(state, { error: action.error, loading: false });
 };
-
 
 //************** CART REDUCER ********************/
 
@@ -80,6 +109,13 @@ const cartReducer = (state = initialState, action) => {
       return removeCartSuccess(state, action);
     case actionTypes.REMOVE_CART_FAIL:
       return removeCartFail(state, action);
+
+    case actionTypes.UPDATE_CART_QTY_START:
+      return updateCartQtyStart(state, action);
+    case actionTypes.UPDATE_CART_QTY_SUCCESS:
+      return updateCartQtySuccess(state, action);
+    case actionTypes.UPDATE_CART_QTY_FAIL:
+      return updateCartQtyFail(state, action);
 
     default:
       return state;

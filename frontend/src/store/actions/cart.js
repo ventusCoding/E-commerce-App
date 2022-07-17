@@ -1,6 +1,37 @@
 import * as actionTypes from "./actionTypes";
 import axios from "axios";
 
+//************** UPDATE CART QTY ********************/
+
+export const updateCartQtySuccess = (cart) => {
+  return {
+    type: actionTypes.UPDATE_CART_QTY_SUCCESS,
+    cart,
+  };
+};
+
+export const updateCartQtyFail = (error) => {
+  return {
+    type: actionTypes.UPDATE_CART_QTY_FAIL,
+    error,
+  };
+};
+export const updateCartQtyStart = () => {
+  return {
+    type: actionTypes.UPDATE_CART_QTY_START,
+  };
+};
+
+export const updateCartQty = (cart, qty) => {
+  return async (dispatch) => {
+    dispatch(addCartStart());
+
+    cart.qty = qty;
+
+    dispatch(updateCartQtySuccess(cart));
+  };
+};
+
 //************** REMOVE CART ********************/
 
 export const removeCartSuccess = (cart) => {
@@ -78,7 +109,7 @@ export const addCart = (id, qty) => {
       const cartItem = cartItems.find((cart) => cart.id === id);
 
       if (cartItem) {
-        if (cartItem.countInStock < (cartItem.qty + qty)) {
+        if (cartItem.countInStock < cartItem.qty + qty) {
           dispatch(addCartFail("Not enough countInStock"));
           return;
         } else {
@@ -93,7 +124,7 @@ export const addCart = (id, qty) => {
       id: data._id,
       name: data.name,
       price: data.price,
-      isExternal : data.isExternal,
+      isExternal: data.isExternal,
       qty: qty,
       image: data.image,
       countInStock: data.countInStock,

@@ -1,4 +1,13 @@
-//************** ADD CART ********************/
+//************** UPDATE CART QTY ********************/
+export {
+  updateCartQty,
+  updateCartQtyFail,
+  updateCartQtyStart,
+  updateCartQtySuccess,
+} from "./cart";
+
+
+//************** REMOVE CART ********************/
 export {
   removeCart,
   removeCartFail,

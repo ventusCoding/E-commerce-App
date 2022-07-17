@@ -1,4 +1,10 @@
 
+//************** UPDATE CART QTY ********************/
+export const UPDATE_CART_QTY_START = "UPDATE_CART_QTY_START";
+export const UPDATE_CART_QTY_SUCCESS = "UPDATE_CART_QTY_SUCCESS";
+export const UPDATE_CART_QTY_FAIL = "UPDATE_CART_QTY_FAIL";
+
+
 //************** REMOVE CART ********************/
 export const REMOVE_CART_START = "REMOVE_CART_START";
 export const REMOVE_CART_SUCCESS = "REMOVE_CART_SUCCESS";
