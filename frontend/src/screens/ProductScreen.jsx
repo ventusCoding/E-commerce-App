@@ -64,7 +64,13 @@ const ProductScreen = () => {
           </Link>
           <Row>
             <Col md={6}>
-              <Image src={product.image} alt={product.name} fluid />
+              <Image
+                src={`/img/products/${
+                  product.image
+                }`}
+                alt={product.name}
+                fluid
+              />
             </Col>
             <Col md={3}>
               <ListGroup variant="flush">
@@ -137,9 +143,7 @@ const ProductScreen = () => {
                       }}
                       className="btn-block"
                       type="button"
-                      disabled={
-                        product.countInStock === 0 || cartLoading
-                      }
+                      disabled={product.countInStock === 0 || cartLoading}
                     >
                       Add to Cart
                     </Button>

@@ -12,7 +12,10 @@ const CartScreen = () => {
 
   const { cartItems, error, loading } = useSelector((state) => state.cart);
 
-  const { removeCart,updateCartQty } = bindActionCreators(actionCreators, dispatch);
+  const { removeCart, updateCartQty } = bindActionCreators(
+    actionCreators,
+    dispatch
+  );
 
   return (
     <Row>
@@ -28,16 +31,26 @@ const CartScreen = () => {
               <ListGroup.Item key={item.id}>
                 <Row>
                   <Col md={2}>
-                    <Image src={item.image} alt={item.name} fluid rounded />
+                    <Image
+                      src={`/img/products/${
+                        item.image
+                      }`}
+                      alt={item.name}
+                      fluid
+                      rounded
+                    />
                   </Col>
                   <Col md={3}>
                     <Link to={`/product/${item.product}`}>{item.name}</Link>
                   </Col>
                   <Col md={2}>${item.price}</Col>
                   <Col md={3}>
-                    <Form.Select value={item.qty} onChange={(e) => {
-                      updateCartQty(item, e.target.value);
-                    }}>
+                    <Form.Select
+                      value={item.qty}
+                      onChange={(e) => {
+                        updateCartQty(item, e.target.value);
+                      }}
+                    >
                       {[...Array(item.countInStock).keys()].map((x) => (
                         <option key={x + 1} value={x + 1}>
                           {x + 1}

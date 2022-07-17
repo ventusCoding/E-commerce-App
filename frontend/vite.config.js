@@ -5,9 +5,16 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   publicDir: "./src/assets",
 
+  envDir: "../",
+  
   server: {
     proxy: {
       "/api": {
+        target: "http://localhost:8000",
+        changeOrigin: true,
+        secure: false,
+      },
+      "/img": {
         target: "http://localhost:8000",
         changeOrigin: true,
         secure: false,
