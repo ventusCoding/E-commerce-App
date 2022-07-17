@@ -4,7 +4,7 @@ import { updateObject } from "../../helpers/utility";
 //************** Initial State ********************/
 
 const initialState = {
-  cartItems: [],
+  cartItems: localStorage.getItem("cartItems") ? JSON.parse(localStorage.getItem("cartItems")) : [],
   loading: false,
   error: null,
 };

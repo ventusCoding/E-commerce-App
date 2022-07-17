@@ -93,6 +93,7 @@ export const addCart = (id, qty) => {
       id: data._id,
       name: data.name,
       price: data.price,
+      isExternal : data.isExternal,
       qty: qty,
       image: data.image,
       countInStock: data.countInStock,
