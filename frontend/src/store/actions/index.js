@@ -1,3 +1,21 @@
+//************** ADD CART ********************/
+export {
+  removeCart,
+  removeCartFail,
+  removeCartStart,
+  removeCartSuccess,
+} from "./cart";
+
+
+//************** ADD CART ********************/
+export {
+  addCart,
+  addCartFail,
+  addCartStart,
+  addCartSuccess,
+} from "./cart";
+
+
 //************** FETCH PRODUCTS ********************/
 export {
     fetchProducts,

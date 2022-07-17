@@ -1,14 +1,15 @@
-import React from 'react'
-import { useParams } from 'react-router-dom'
+import React from "react";
+
 
 const CartScreen = () => {
+  
 
-    const params = useParams();
 
-    console.log(params);
   return (
-    <div>CartScreen</div>
-  )
-}
+    <div>
+      CartScreen
+    </div>
+  );
+};
 
-export default CartScreen
+export default CartScreen;

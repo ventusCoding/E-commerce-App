@@ -8,7 +8,6 @@ const initialState = {
   products: [],
   loading: false,
   error: null,
-  success: "",
   product:{},
 };
 

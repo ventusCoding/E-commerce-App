@@ -18,39 +18,45 @@ import Loader from "../components/Loader";
 import Message from "../components/Message";
 import { useNavigate } from "react-router-dom";
 
-
-
-
-const ProductScreen = (props) => {
-  const [quantity, setQuantity] = useState(0);
+const ProductScreen = () => {
+  const [quantity, setQuantity] = useState(1);
 
   const { id } = useParams();
   const navigate = useNavigate();
 
-
-
   const dispatch = useDispatch();
 
-  const { product, error, loading } = useSelector((state) => state.products);
+  const {
+    product,
+    error: productError,
+    loading: productLoading,
+  } = useSelector((state) => state.products);
 
   const { fetchProductDetail } = bindActionCreators(actionCreators, dispatch);
+
+  const {
+    cartItems,
+    error: cartError,
+    loading: cartLoading,
+  } = useSelector((state) => state.cart);
+
+  const { addCart, removeCart } = bindActionCreators(actionCreators, dispatch);
 
   useEffect(() => {
     fetchProductDetail(id);
   }, [product._id]);
 
   const addToCartHandler = () => {
-    console.log("Add to cart");
-    // history.push(`/cart/${id}?qty=${quantity}`);
-    navigate(`/cart/${id}?qty=${quantity}`);
+    addCart(id, quantity);
+    // navigate(`/cart/${id}?qty=${quantity}`);
   };
 
   return (
     <React.Fragment>
-      {loading ? (
+      {productLoading ? (
         <Loader />
-      ) : error ? (
-        <Message variant="danger">{error}</Message>
+      ) : productError ? (
+        <Message variant="danger">{productError}</Message>
       ) : (
         <React.Fragment>
           <Link className="btn btn-light my-3" to={"/"}>
@@ -131,7 +137,9 @@ const ProductScreen = (props) => {
                       }}
                       className="btn-block"
                       type="button"
-                      disabled={product.countInStock === 0}
+                      disabled={
+                        product.countInStock === 0 || cartLoading
+                      }
                     >
                       Add to Cart
                     </Button>
