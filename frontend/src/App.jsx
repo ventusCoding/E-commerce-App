@@ -15,10 +15,11 @@ const App = () => {
           <Routes>
             <Route path="/" element={<HomeScreen />} />
             <Route path="/product/:id" element={<ProductScreen />} />
-            {/* Optional params Methode 1 */}
-            <Route path="/cart" element={<CartScreen />}>
+            <Route path="/cart" element={<CartScreen />} />
+            {/* Optional params Methode 1 */
+            /* <Route path="/cart" element={<CartScreen />}>
               <Route path=":id" element={<CartScreen />} />
-            </Route>
+            </Route> */}
             {/* Optional params Methode 2
             <Route path="/cart/*" element={<CartScreen />}/>
              */}

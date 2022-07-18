@@ -1,14 +1,24 @@
 import React from "react";
-import { Button, Col, Form, ListGroup, Row, Image } from "react-bootstrap";
+import {
+  Button,
+  Col,
+  Form,
+  ListGroup,
+  Row,
+  Image,
+  Card,
+} from "react-bootstrap";
 import { bindActionCreators } from "redux";
 import { useSelector, useDispatch } from "react-redux";
 import * as actionCreators from "../store/actions/index";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const CartScreen = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { cartItems, error, loading } = useSelector((state) => state.cart);
 
@@ -16,6 +26,10 @@ const CartScreen = () => {
     actionCreators,
     dispatch
   );
+
+  const checkoutHandler = () => {
+    navigate(`/login?redirect=shipping`);
+  };
 
   return (
     <Row>
@@ -32,9 +46,7 @@ const CartScreen = () => {
                 <Row>
                   <Col md={2}>
                     <Image
-                      src={`/img/products/${
-                        item.image
-                      }`}
+                      src={`/img/products/${item.image}`}
                       alt={item.name}
                       fluid
                       rounded
@@ -74,9 +86,44 @@ const CartScreen = () => {
         )}
       </Col>
 
-      <Col md={2}></Col>
-
-      <Col md={2}></Col>
+      {
+        cartItems.length > 0 && (
+       <Col
+        style={{
+          width: "100%",
+        }}
+        md={4}
+      >
+        <Card >
+          <ListGroup variant="flush">
+            <ListGroup.Item>
+              <h3>
+                Subtotal ({
+                  cartItems.map((item) => item.qty).reduce((a, b) => {
+                    console.log(a, b);
+                    return a + b;
+                  })
+                })
+                items
+              </h3>
+              $
+              {cartItems
+                .reduce((acc, item) => acc + item.qty * item.price, 0)
+                .toFixed(2)}
+            </ListGroup.Item>
+            <ListGroup.Item>
+              <Button
+                type="button"
+                className="btn-block"
+                disabled={cartItems.length === 0}
+                onClick={checkoutHandler}
+              >
+                Proceed To Checkout
+              </Button>
+            </ListGroup.Item>
+          </ListGroup>
+        </Card>
+      </Col>)}
     </Row>
   );
 };

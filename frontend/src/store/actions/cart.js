@@ -26,7 +26,7 @@ export const updateCartQty = (cart, qty) => {
   return async (dispatch) => {
     dispatch(addCartStart());
 
-    cart.qty = qty;
+    cart.qty = parseInt(qty);
 
     dispatch(updateCartQtySuccess(cart));
   };
@@ -109,11 +109,12 @@ export const addCart = (id, qty) => {
       const cartItem = cartItems.find((cart) => cart.id === id);
 
       if (cartItem) {
-        if (cartItem.countInStock < cartItem.qty + qty) {
+   
+        if (cartItem.countInStock < parseInt(cartItem.qty) + parseInt(qty)) {
           dispatch(addCartFail("Not enough countInStock"));
           return;
         } else {
-          cartItem.qty += qty;
+          cartItem.qty += parseInt(qty);
           dispatch(addCartSuccess(cartItem));
           return;
         }
@@ -125,7 +126,7 @@ export const addCart = (id, qty) => {
       name: data.name,
       price: data.price,
       isExternal: data.isExternal,
-      qty: qty,
+      qty: parseInt(qty),
       image: data.image,
       countInStock: data.countInStock,
     };

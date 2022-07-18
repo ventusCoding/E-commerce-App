@@ -80,6 +80,8 @@ const addCartSuccess = (state, action) => {
 
   cartItems.push(newCart);
 
+  console.log(cartItems);
+
   localStorage.setItem("cartItems", JSON.stringify(cartItems));
 
   return updateObject(state, {
