@@ -12,14 +12,26 @@ const productSchema = new mongoose.Schema(
       required: [true, "A Product must Have a name"],
     },
     image: {
-      type: String,
-      default: "no-image.png",
+      url: {
+        type: String,
+        default: "no-image.png",
+      },
+      isExternal: {
+        type: Boolean,
+        default: false,
+      },
     },
-    images: [String],
-    isExternal: {
-      type: Boolean,
-      default: false,
-    },
+    images: [
+      {
+        url: {
+          type: String,
+        },
+        isExternal: {
+          type: Boolean,
+          default: false,
+        },
+      },
+    ],
 
     brand: {
       type: String,
@@ -52,7 +64,7 @@ const productSchema = new mongoose.Schema(
     },
     countInStock: {
       type: Number,
-        required: [true, "A Product must Have a count in stock"],
+      required: [true, "A Product must Have a count in stock"],
       default: 0,
     },
   },

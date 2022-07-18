@@ -32,6 +32,8 @@ const ProductScreen = () => {
     loading: productLoading,
   } = useSelector((state) => state.products);
 
+  console.log(product);
+
   const { fetchProductDetail } = bindActionCreators(actionCreators, dispatch);
 
   const {
@@ -53,7 +55,7 @@ const ProductScreen = () => {
 
   return (
     <React.Fragment>
-      {productLoading ? (
+      {productLoading || Object.keys(product).length === 0 ? (
         <Loader />
       ) : productError ? (
         <Message variant="danger">{productError}</Message>
@@ -66,7 +68,7 @@ const ProductScreen = () => {
             <Col md={6}>
               <Image
                 src={`/img/products/${
-                  product.image
+                  product.image.url
                 }`}
                 alt={product.name}
                 fluid
