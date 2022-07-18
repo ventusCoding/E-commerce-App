@@ -72,7 +72,7 @@ exports.signup = catchAsync(async (req, res, next) => {
   if (req.file) {
     userData.photo = {
       url: req.file.filename,
-      isDefault: false,
+      isExternal: false,
     };
   }
 

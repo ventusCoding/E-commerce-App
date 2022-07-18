@@ -23,4 +23,33 @@ router.patch(
   authController.updatePassword
 );
 
+router.patch(
+  "/updateMe",
+  authController.protect,
+  userController.uploadUserPhoto,
+  userController.resizeUserPhoto,
+  userController.updateMe
+);
+
+router
+  .route("/:id")
+  .get(
+    authController.protect,
+    authController.restrictTo("admin"),
+    userController.getUserById
+  )
+  .delete(
+    authController.protect,
+    authController.restrictTo("admin"),
+    userController.deleteUserByAdmin
+  );
+
+router
+  .route("/")
+  .get(
+    authController.protect,
+    authController.restrictTo("admin"),
+    userController.getAllUsers
+  );
+
 module.exports = router;
