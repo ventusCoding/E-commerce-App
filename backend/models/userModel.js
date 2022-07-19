@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcryptjs");
 const crypto = require("crypto");
+const imageSchema = require("./imageModel");
 
 const userSchema = new mongoose.Schema(
   {
@@ -10,13 +11,10 @@ const userSchema = new mongoose.Schema(
       required: [true, "Please tell us your name!"],
     },
     photo: {
-      url: {
-        type: String,
-        default: "default.jpg",
-      },
-      isExternal: {
-        type: Boolean,
-        default: false,
+      type: imageSchema,
+      default: {
+        url: "default.jpg",
+        isExternal: false,
       },
     },
     email: {
