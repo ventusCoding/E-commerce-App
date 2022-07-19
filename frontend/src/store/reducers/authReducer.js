@@ -43,8 +43,12 @@ const authLogout = (state, action) => {
   return updateObject(state, {
     token: null,
     userId: null,
-    // user: null,
+    user: null,
+    isAuthenticated: false,
+    error: null,
+    message: "",
     loading: false,
+    authResult: null,
   });
 };
 

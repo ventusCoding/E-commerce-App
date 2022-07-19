@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { Container } from "react-bootstrap";
@@ -7,8 +8,23 @@ import ProductScreen from "./screens/ProductScreen";
 import CartScreen from "./screens/CartScreen";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./components/RegisterScreen";
+import { useSelector, useDispatch } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as actionCreators from "./store/actions/index";
 
 const App = () => {
+  const { loading, error, isAuthenticated } = useSelector(
+    (state) => state.auth
+  );
+
+  const dispatch = useDispatch();
+
+  const { checkAuthState } = bindActionCreators(actionCreators, dispatch);
+
+  useEffect(() => {
+    checkAuthState();
+  }, [isAuthenticated]);
+
   return (
     <Router>
       <Header />

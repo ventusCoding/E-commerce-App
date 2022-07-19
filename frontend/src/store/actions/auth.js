@@ -32,7 +32,6 @@ export const authFail = (error) => {
   };
 };
 export const logout = () => {
-  // localStorage.removeItem("jwt");
   deleteCookie("jwt");
   return {
     type: actionTypes.AUTH_LOGOUT,
@@ -51,7 +50,6 @@ export const auth = (email, password) => {
     axios
       .post(`/api/v1/users/login`, authData, config)
       .then((res) => {
-        // localStorage.setItem("jwt", res.data.token);
         setCookie("jwt", res.data.token, { expires: 90 });
 
         let loadedUser = {};
@@ -104,7 +102,6 @@ export const setAuthResult = (result) => {
 export const checkAuthState = () => {
   return (dispatch) => {
     dispatch(authStart());
-    // const token = localStorage.getItem("jwt");
     const token = getCookie("jwt");
 
     if (token) {
