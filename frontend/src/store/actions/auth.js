@@ -48,36 +48,21 @@ export const auth = (email, password) => {
 
     const config = { headers: { "Content-Type": "application/json" } };
 
-    console.log(
-      "request to ",
-      `/api/v1/users/login`
-    );
-
     axios
-      .post(
-        `/api/v1/users/login`,
-        authData,
-        config
-      )
+      .post(`/api/v1/users/login`, authData, config)
       .then((res) => {
         // localStorage.setItem("jwt", res.data.token);
         setCookie("jwt", res.data.token, { expires: 90 });
 
-
         let loadedUser = {};
-        loadedUser.name = res.data.data.user.name;
-        loadedUser.email = res.data.data.user.email;
-        loadedUser.photo = res.data.data.user.photo;
-        loadedUser.role = res.data.data.user.role;
+        loadedUser.name = res.data.data.name;
+        loadedUser.email = res.data.data.email;
+        loadedUser.photo = res.data.data.photo;
+        loadedUser.role = res.data.data.role;
 
- 
-
-        dispatch(
-          authSuccess(res.data.token, res.data.data.user._id, loadedUser)
-        );
+        dispatch(authSuccess(res.data.token, res.data.data._id, loadedUser));
       })
       .catch(function (error) {
-        // console.log(error);
         dispatch(authFail(error.response.data.message));
       });
   };
@@ -99,17 +84,11 @@ export const signup = (data) => {
 
     const config = { headers: { "Content-Type": "application/json" } };
     axios
-      .post(
-        `/api/v1/users/signup`,
-        formData,
-        config
-      )
+      .post(`/api/v1/users/signup`, formData, config)
       .then((res) => {
         dispatch(authSuccessMessage(res.data.message));
       })
       .catch(function (error) {
-        console.log("erroraaa", error.response);
-
         dispatch(authFail(error.response.data.message));
       });
   };
@@ -142,10 +121,7 @@ export const checkAuthState = () => {
         };
 
         axios
-          .get(
-            `/api/v1/users/${decoded.id}`,
-            config
-          )
+          .get(`/api/v1/users/${decoded.id}`, config)
           .then((response) => {
             let loadedUser = {};
             loadedUser.name = response.data.data.name;
