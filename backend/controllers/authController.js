@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 const AppError = require("../utils/appError");
 const Email = require("../utils/email");
 const mongoose = require("mongoose");
+const imageSchema = require("../models/imageModel");
 
 const signToken = (id) => {
   return jwt.sign({ id: id }, process.env.JWT_SECRET, {
@@ -70,10 +71,11 @@ exports.signup = catchAsync(async (req, res, next) => {
   };
 
   if (req.file) {
-    userData.photo = {
-      url: req.file.filename,
-      isExternal: false,
-    };
+    var img = imageSchema;
+    img.url = req.file.filename;
+    img.isExternal = false;
+
+    userData.photo = img;
   }
 
   const newUser = await User.create(userData);
@@ -93,7 +95,6 @@ exports.signup = catchAsync(async (req, res, next) => {
 });
 
 exports.login = catchAsync(async (req, res, next) => {
-
   const { email, password } = req.body;
 
   if (!email || !password) {

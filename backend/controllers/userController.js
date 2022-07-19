@@ -6,6 +6,7 @@ const AppError = require("../utils/appError");
 const catchasync = require("../utils/catchAsync");
 const { uuid } = require("uuidv4");
 const crypto = require("crypto");
+const imageSchema = require("../models/imageModel");
 
 const multerStorage = multer.memoryStorage();
 
@@ -108,10 +109,7 @@ exports.updateMe = catchasync(async (req, res, next) => {
   const filteredBody = filterObj(req.body, "name", "email");
 
   if (req.file) {
-    filteredBody.photo = {
-      url: req.file.filename,
-      isExternal: false,
-    };
+
   }
 
   const updatedUser = await User.findByIdAndUpdate(req.user.id, filteredBody, {

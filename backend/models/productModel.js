@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const imageSchema = require("./imageModel");
 
 const productSchema = new mongoose.Schema(
   {
@@ -12,24 +13,15 @@ const productSchema = new mongoose.Schema(
       required: [true, "A Product must Have a name"],
     },
     image: {
-      url: {
-        type: String,
-        default: "no-image.png",
-      },
-      isExternal: {
-        type: Boolean,
-        default: false,
+      type: imageSchema,
+      default: {
+        url: "no-image.jpg",
+        isExternal: false,
       },
     },
     images: [
       {
-        url: {
-          type: String,
-        },
-        isExternal: {
-          type: Boolean,
-          default: false,
-        },
+        type: imageSchema,
       },
     ],
 
