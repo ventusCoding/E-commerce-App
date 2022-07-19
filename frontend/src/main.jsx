@@ -8,10 +8,12 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import productsReducer from "./store/reducers/productsReducer";
 import cartReducer from "./store/reducers/cartReducer";
+import authReducer from "./store/reducers/authReducer";
 
 const rootReducer = combineReducers({
   products: productsReducer,
   cart: cartReducer,
+  auth: authReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(thunk));

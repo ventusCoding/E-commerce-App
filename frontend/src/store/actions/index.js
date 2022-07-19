@@ -1,3 +1,14 @@
+//************** AUTH ********************/
+
+export {
+  auth,
+  signup,
+  logout,
+  setAuthResult,
+  checkAuthState,
+} from "./auth";
+
+
 //************** UPDATE CART QTY ********************/
 export {
   updateCartQty,
