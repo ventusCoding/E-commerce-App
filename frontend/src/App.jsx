@@ -7,7 +7,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProductScreen from "./screens/ProductScreen";
 import CartScreen from "./screens/CartScreen";
 import LoginScreen from "./screens/LoginScreen";
-import RegisterScreen from "./components/RegisterScreen";
+import RegisterScreen from "./screens/RegisterScreen";
+import EmailVerificationScreen from "./screens/EmailVerificationScreen";
+
 import { useSelector, useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as actionCreators from "./store/actions/index";
@@ -36,6 +38,7 @@ const App = () => {
             <Route path="/cart" element={<CartScreen />} />
             <Route path="/login" element={<LoginScreen />} />
             <Route path="/register" element={<RegisterScreen />} />
+            <Route path="/emailVerification/:token" element={<EmailVerificationScreen/>} />
             {/* Optional params Methode 1 */
             /* <Route path="/cart" element={<CartScreen />}>
               <Route path=":id" element={<CartScreen />} />

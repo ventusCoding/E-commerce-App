@@ -3,6 +3,16 @@ import * as actionTypes from "./actionTypes";
 import jwt_decode from "jwt-decode";
 import { setCookie, deleteCookie, getCookie } from "../../helpers/cookie";
 
+//************** RESET_AUTH_STATE ********************/
+
+export const resetAuthState = () => {
+  return {
+    type: actionTypes.RESET_AUTH_STATE,
+  };
+};
+
+//************** AUTH ********************/
+
 export const authStart = () => {
   return {
     type: actionTypes.AUTH_START,
@@ -31,12 +41,7 @@ export const authFail = (error) => {
     error,
   };
 };
-export const logout = () => {
-  deleteCookie("jwt");
-  return {
-    type: actionTypes.AUTH_LOGOUT,
-  };
-};
+
 export const auth = (email, password) => {
   return (dispatch) => {
     dispatch(authStart());
@@ -66,6 +71,26 @@ export const auth = (email, password) => {
   };
 };
 
+//************** AUTH_RESULT ********************/
+
+export const setAuthResult = (result) => {
+  return {
+    type: actionTypes.SET_AUTH_RESULT,
+    result,
+  };
+};
+
+//************** LOGOUT ********************/
+
+export const logout = () => {
+  deleteCookie("jwt");
+  return {
+    type: actionTypes.AUTH_LOGOUT,
+  };
+};
+
+//************** SIGNUP ********************/
+
 export const signup = (data) => {
   return (dispatch) => {
     dispatch(authStart());
@@ -92,12 +117,26 @@ export const signup = (data) => {
   };
 };
 
-export const setAuthResult = (result) => {
-  return {
-    type: actionTypes.SET_AUTH_RESULT,
-    result,
+//************** AUTH_EMAIL_VERIFICATION ********************/
+
+export const emailVerification = (token) => {
+  return (dispatch) => {
+    dispatch(authStart());
+
+    axios
+      .patch(`/api/v1/users/emailVerification/${token}`)
+      .then((res) => {
+        dispatch(authSuccessMessage(res.data.message));
+      })
+      .catch(function (error) {
+        dispatch(authFail(error.response.data.message));
+        // dispatch(authSuccessMessage(error.response.data.message));
+
+      });
   };
 };
+
+//************** CHECK_AUTH_STATE ********************/
 
 export const checkAuthState = () => {
   return (dispatch) => {

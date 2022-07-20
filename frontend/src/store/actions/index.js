@@ -6,6 +6,8 @@ export {
   logout,
   setAuthResult,
   checkAuthState,
+  emailVerification,
+  resetAuthState,
 } from "./auth";
 
 

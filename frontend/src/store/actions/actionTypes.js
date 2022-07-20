@@ -4,6 +4,11 @@ export const AUTH_SUCCESS = "AUTH_SUCCESS";
 export const AUTH_SUCCESS_MESSAGE = "AUTH_SUCCESS_MESSAGE";
 export const AUTH_FAIL = "AUTH_FAIL";
 export const AUTH_LOGOUT = "AUTH_LOGOUT";
+export const AUTH_EMAIL_VERIFICATION = "AUTH_EMAIL_VERIFICATION";
+
+//************** RESET_AUTH_STATE ********************/
+
+export const RESET_AUTH_STATE = "RESET_AUTH_STATE";
 
 //************** AUTH RESULT ********************/
 
