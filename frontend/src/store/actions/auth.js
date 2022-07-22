@@ -21,10 +21,27 @@ export const fetchUserDataFail = (error) => {
   };
 };
 
-export const fetchUserData = () => {
+export const fetchUserData = (userId,token) => {
   return (dispatch) => {
-    //fetch user data
-    console.log("fetch user data");
+
+    dispatch(authStart());
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    axios
+      .get(`/api/v1/users/${userId}`, config)
+      .then(({data:{data}}) => {
+        dispatch(fetchUserDataSuccess(data, false, null));
+      })
+      .catch((error) => {
+        console.log(error.response.data.message);
+        dispatch(fetchUserDataFail(error.response.data.message));
+      });
   };
 };
 
@@ -78,13 +95,6 @@ export const authSuccess = (token, userId, user) => {
   };
 };
 
-export const authSuccessMessage = (message) => {
-  return {
-    type: actionTypes.AUTH_SUCCESS_MESSAGE,
-    message,
-  };
-};
-
 export const authFail = (error) => {
   return {
     type: actionTypes.AUTH_FAIL,
@@ -118,15 +128,6 @@ export const auth = (email, password) => {
       .catch(function (error) {
         dispatch(authFail(error.response.data.message));
       });
-  };
-};
-
-//************** AUTH_RESULT ********************/
-
-export const setAuthResult = (result) => {
-  return {
-    type: actionTypes.SET_AUTH_RESULT,
-    result,
   };
 };
 
@@ -214,17 +215,14 @@ export const checkAuthState = () => {
             loadedUser.photo = response.data.data.photo;
             loadedUser.role = response.data.data.role;
 
-            dispatch(setAuthResult("success"));
             dispatch(authSuccess(token, response.data.data._id, loadedUser));
           })
           .catch((error) => {
-            dispatch(setAuthResult("fail"));
-            dispatch(logout());
+            dispatch(authFail(error.response.data.message));
           });
       }
     } else {
-      dispatch(setAuthResult("fail"));
-      dispatch(logout());
+      dispatch(authFail("You are not logged in ! Please login to get access."));
     }
   };
 };

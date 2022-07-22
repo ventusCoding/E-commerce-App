@@ -11,7 +11,6 @@ const initialState = {
   error: null,
   message: "",
   loading: false,
-  authResult: null,
 };
 
 //************** FETCH_USER_DATA ********************/
@@ -53,7 +52,6 @@ const resetAuthState = (state, action) => {
     error: null,
     message: "",
     loading: false,
-    authResult: null,
   });
 };
 
@@ -63,12 +61,7 @@ const authStart = (state, action) => {
   return updateObject(state, { error: null, loading: true });
 };
 
-const authSuccessMessage = (state, action) => {
-  return updateObject(state, {
-    message: action.message,
-    loading: false,
-  });
-};
+
 
 const authSuccess = (state, action) => {
   return updateObject(state, {
@@ -101,23 +94,17 @@ const authLogout = (state, action) => {
 
 //************** AUTH REDUCER ********************/
 
-const setAuthResult = (state, action) => {
-  return updateObject(state, { authResult: action.result });
-};
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.AUTH_START:
       return authStart(state, action);
     case actionTypes.AUTH_SUCCESS:
       return authSuccess(state, action);
-    case actionTypes.AUTH_SUCCESS_MESSAGE:
-      return authSuccessMessage(state, action);
     case actionTypes.AUTH_FAIL:
       return authFail(state, action);
     case actionTypes.AUTH_LOGOUT:
       return authLogout(state, action);
-    case actionTypes.SET_AUTH_RESULT:
-      return setAuthResult(state, action);
+
     case actionTypes.RESET_AUTH_STATE:
       return resetAuthState(state, action);
     case actionTypes.UPDATE_USER_START:

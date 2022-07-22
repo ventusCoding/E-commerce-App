@@ -4,7 +4,6 @@ export {
   auth,
   signup,
   logout,
-  setAuthResult,
   checkAuthState,
   emailVerification,
   resetAuthState,

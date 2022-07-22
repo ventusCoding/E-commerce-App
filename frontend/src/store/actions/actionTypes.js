@@ -11,7 +11,6 @@ export const UPDATE_USER_FAIL = "UPDATE_USER_FAIL";
 //************** AUTH ********************/
 export const AUTH_START = "AUTH_START";
 export const AUTH_SUCCESS = "AUTH_SUCCESS";
-export const AUTH_SUCCESS_MESSAGE = "AUTH_SUCCESS_MESSAGE";
 export const AUTH_FAIL = "AUTH_FAIL";
 export const AUTH_LOGOUT = "AUTH_LOGOUT";
 export const AUTH_EMAIL_VERIFICATION = "AUTH_EMAIL_VERIFICATION";
@@ -19,10 +18,6 @@ export const AUTH_EMAIL_VERIFICATION = "AUTH_EMAIL_VERIFICATION";
 //************** RESET_AUTH_STATE ********************/
 
 export const RESET_AUTH_STATE = "RESET_AUTH_STATE";
-
-//************** AUTH RESULT ********************/
-
-export const SET_AUTH_RESULT = "SET_AUTH_RESULT";
 
 //************** UPDATE CART QTY ********************/
 export const UPDATE_CART_QTY_START = "UPDATE_CART_QTY_START";
