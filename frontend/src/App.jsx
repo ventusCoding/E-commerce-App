@@ -13,6 +13,7 @@ import EmailVerificationScreen from "./screens/EmailVerificationScreen";
 import { useSelector, useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as actionCreators from "./store/actions/index";
+import ProfileScreen from "./screens/ProfileScreen";
 
 const App = () => {
   const { loading, error, isAuthenticated } = useSelector(
@@ -39,6 +40,7 @@ const App = () => {
             <Route path="/login" element={<LoginScreen />} />
             <Route path="/register" element={<RegisterScreen />} />
             <Route path="/emailVerification/:token" element={<EmailVerificationScreen/>} />
+            <Route path="/profile" element={<ProfileScreen/>} />
             {/* Optional params Methode 1 */
             /* <Route path="/cart" element={<CartScreen />}>
               <Route path=":id" element={<CartScreen />} />
