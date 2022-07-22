@@ -39,21 +39,21 @@ const ProfileScreen = () => {
     <Row>
       <Col md={3}>
         <h2>User Profile</h2>
-        {authMessage && <Message variant="danger">{authMessage}</Message>}
-        {/* {authState.message && <Message variant='success'>Profile Updated</Message>} */}
+        {authMessage && <Message variant="success">{authMessage}</Message>}
+        {authError && <Message variant="danger">{authError}</Message>}
         {authLoading ? (
           <Loader />
-        ) : authError ? (
-          <Message variant="danger">{authError}</Message>
         ) : (
-          <Form onSubmit={() => {}}>
+          <Form
+            onSubmit={updateUserHandleSubmit((data) => updateUser(data, token))}
+          >
             <Form.Group controlId="name">
               <Form.Label>Name</Form.Label>
               <Form.Control
                 type="name"
+                {...updateUserRegister("name")}
                 placeholder="Enter name"
                 defaultValue={user && user.name}
-                onChange={(e) => {}}
               ></Form.Control>
             </Form.Group>
 
@@ -61,9 +61,18 @@ const ProfileScreen = () => {
               <Form.Label>Email Address</Form.Label>
               <Form.Control
                 type="email"
+                {...updateUserRegister("email")}
                 defaultValue={user && user.email}
                 placeholder="Enter email"
-                onChange={(e) => {}}
+              ></Form.Control>
+            </Form.Group>
+
+            <Form.Group style={{ marginTop: 20 }} controlId="password">
+              <Form.Label>Current Password</Form.Label>
+              <Form.Control
+                type="password"
+                {...updateUserRegister("passwordCurrent")}
+                placeholder="Current password"
               ></Form.Control>
             </Form.Group>
 
@@ -71,8 +80,8 @@ const ProfileScreen = () => {
               <Form.Label>Password</Form.Label>
               <Form.Control
                 type="password"
+                {...updateUserRegister("password")}
                 placeholder="Enter password"
-                onChange={(e) => {}}
               ></Form.Control>
             </Form.Group>
 
@@ -80,8 +89,8 @@ const ProfileScreen = () => {
               <Form.Label>Confirm Password</Form.Label>
               <Form.Control
                 type="password"
+                {...updateUserRegister("passwordConfirm")}
                 placeholder="Confirm password"
-                onChange={(e) => {}}
               ></Form.Control>
             </Form.Group>
 

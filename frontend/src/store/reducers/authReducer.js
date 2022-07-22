@@ -34,11 +34,16 @@ const updateUserSuccess = (state, action) => {
     user: action.user,
     loading: false,
     error: null,
+    message: action.message,
   });
 };
 
 const updateUserFail = (state, action) => {
-  return updateObject(state, { error: action.error, loading: false });
+  return updateObject(state, {
+    error: action.error,
+    loading: false,
+    message: "",
+  });
 };
 
 //************** RESET_AUTH_STATE ********************/
@@ -60,8 +65,6 @@ const resetAuthState = (state, action) => {
 const authStart = (state, action) => {
   return updateObject(state, { error: null, loading: true });
 };
-
-
 
 const authSuccess = (state, action) => {
   return updateObject(state, {
@@ -107,7 +110,7 @@ const authReducer = (state = initialState, action) => {
 
     case actionTypes.RESET_AUTH_STATE:
       return resetAuthState(state, action);
-    case actionTypes.UPDATE_USER_START:
+    case actionTypes.UPDATE_USER_SUCCESS:
       return updateUserSuccess(state, action);
     case actionTypes.UPDATE_USER_FAIL:
       return updateUserFail(state, action);

@@ -39,12 +39,6 @@ const EmailVerificationScreen = () => {
   ) : (
     <Loader />
   );
-
-  // <React.Fragment>
-  //   {loading && <Loader />}
-  //   {error && <Message variant="danger">{error}</Message>}
-  //   {message && <Message variant="success">{message}</Message>}
-  // </React.Fragment>
 };
 
 export default EmailVerificationScreen;

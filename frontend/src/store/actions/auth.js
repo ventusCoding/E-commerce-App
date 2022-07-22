@@ -21,9 +21,8 @@ export const fetchUserDataFail = (error) => {
   };
 };
 
-export const fetchUserData = (userId,token) => {
+export const fetchUserData = (userId, token) => {
   return (dispatch) => {
-
     dispatch(authStart());
 
     const config = {
@@ -35,11 +34,10 @@ export const fetchUserData = (userId,token) => {
 
     axios
       .get(`/api/v1/users/${userId}`, config)
-      .then(({data:{data}}) => {
+      .then(({ data: { data } }) => {
         dispatch(fetchUserDataSuccess(data, false, null));
       })
       .catch((error) => {
-        console.log(error.response.data.message);
         dispatch(fetchUserDataFail(error.response.data.message));
       });
   };
@@ -47,12 +45,13 @@ export const fetchUserData = (userId,token) => {
 
 //************** UPDATE_USER_STATE ********************/
 
-export const updateUserSuccess = (user, loading, error) => {
+export const updateUserSuccess = (user, loading, error,message) => {
   return {
     type: actionTypes.UPDATE_USER_SUCCESS,
     user: user,
     loading: loading,
     error: error,
+    message: message,
   };
 };
 
@@ -63,10 +62,49 @@ export const updateUserFail = (error) => {
   };
 };
 
-export const updateUser = () => {
+export const updateUser = (data, token) => {
   return (dispatch) => {
-    //update user
-    console.log("update user");
+    dispatch(authStart());
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const userData = {
+      email: data.email,
+      name: data.name,
+    }
+
+    const userPassword = {
+      password: data.password,
+      passwordConfirm: data.passwordConfirm,
+      passwordCurrent: data.passwordCurrent,
+    }
+
+    if (data.password !== "" && data.passwordConfirm !== "" && data.passwordCurrent !== "") {
+      axios
+        .patch(`/api/v1/users/updateMyPassword`, userPassword, config)
+        .then(({ data: { data } }) => {
+          dispatch(updateUserSuccess(data, false, null, "Profile updated successfully"));
+        })
+        .catch((error) => {
+          dispatch(updateUserFail(error.response.data.message));
+        });
+    }
+
+    if (data.name !== "" || data.email !== "") {
+      axios
+        .patch(`/api/v1/users/updateMe`, userData, config)
+        .then(({ data: { data } }) => {
+          dispatch(updateUserSuccess(data, false, null , "Profile updated successfully"));
+        })
+        .catch((error) => {
+          dispatch(updateUserFail(error.response.data.message));
+        });
+    }
   };
 };
 
