@@ -3,6 +3,56 @@ import * as actionTypes from "./actionTypes";
 import jwt_decode from "jwt-decode";
 import { setCookie, deleteCookie, getCookie } from "../../helpers/cookie";
 
+//************** FETCH_USER_DATA ********************/
+
+export const fetchUserDataSuccess = (user, loading, error) => {
+  return {
+    type: actionTypes.FETCH_USER_DATA_SUCCESS,
+    user: user,
+    loading: loading,
+    error: error,
+  };
+};
+
+export const fetchUserDataFail = (error) => {
+  return {
+    type: actionTypes.FETCH_USER_DATA_FAIL,
+    error,
+  };
+};
+
+export const fetchUserData = () => {
+  return (dispatch) => {
+    //fetch user data
+    console.log("fetch user data");
+  };
+};
+
+//************** UPDATE_USER_STATE ********************/
+
+export const updateUserSuccess = (user, loading, error) => {
+  return {
+    type: actionTypes.UPDATE_USER_SUCCESS,
+    user: user,
+    loading: loading,
+    error: error,
+  };
+};
+
+export const updateUserFail = (error) => {
+  return {
+    type: actionTypes.UPDATE_USER_FAIL,
+    error,
+  };
+};
+
+export const updateUser = () => {
+  return (dispatch) => {
+    //update user
+    console.log("update user");
+  };
+};
+
 //************** RESET_AUTH_STATE ********************/
 
 export const resetAuthState = () => {
@@ -131,7 +181,6 @@ export const emailVerification = (token) => {
       .catch(function (error) {
         dispatch(authFail(error.response.data.message));
         // dispatch(authSuccessMessage(error.response.data.message));
-
       });
   };
 };

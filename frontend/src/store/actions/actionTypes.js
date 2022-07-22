@@ -1,3 +1,13 @@
+//************** FETCH_USER_DATA ********************/
+export const FETCH_USER_DATA_SUCCESS = "FETCH_USER_DATA_SUCCESS";
+export const FETCH_USER_DATA_FAIL = "FETCH_USER_DATA_FAIL";
+
+
+//************** UPDATE_USER ********************/
+export const UPDATE_USER_SUCCESS = "UPDATE_USER_SUCCESS";
+export const UPDATE_USER_FAIL = "UPDATE_USER_FAIL";
+
+
 //************** AUTH ********************/
 export const AUTH_START = "AUTH_START";
 export const AUTH_SUCCESS = "AUTH_SUCCESS";

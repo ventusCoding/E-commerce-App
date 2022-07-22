@@ -1,4 +1,4 @@
-//************** AUTH ********************/
+//************** AUTH_&_USER ********************/
 
 export {
   auth,
@@ -8,6 +8,8 @@ export {
   checkAuthState,
   emailVerification,
   resetAuthState,
+  updateUser,
+  fetchUserData,
 } from "./auth";
 
 

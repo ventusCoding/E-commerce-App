@@ -14,6 +14,34 @@ const initialState = {
   authResult: null,
 };
 
+//************** FETCH_USER_DATA ********************/
+
+const fetchUserDataSuccess = (state, action) => {
+  return updateObject(state, {
+    user: action.user,
+    loading: false,
+    error: null,
+  });
+};
+
+const fetchUserDataFail = (state, action) => {
+  return updateObject(state, { error: action.error, loading: false });
+};
+
+//************** UPDATE_USER_STATE ********************/
+
+const updateUserSuccess = (state, action) => {
+  return updateObject(state, {
+    user: action.user,
+    loading: false,
+    error: null,
+  });
+};
+
+const updateUserFail = (state, action) => {
+  return updateObject(state, { error: action.error, loading: false });
+};
+
 //************** RESET_AUTH_STATE ********************/
 
 const resetAuthState = (state, action) => {
@@ -92,6 +120,14 @@ const authReducer = (state = initialState, action) => {
       return setAuthResult(state, action);
     case actionTypes.RESET_AUTH_STATE:
       return resetAuthState(state, action);
+    case actionTypes.UPDATE_USER_START:
+      return updateUserSuccess(state, action);
+    case actionTypes.UPDATE_USER_FAIL:
+      return updateUserFail(state, action);
+    case actionTypes.FETCH_USER_DATA_SUCCESS:
+      return fetchUserDataSuccess(state, action);
+    case actionTypes.FETCH_USER_DATA_FAIL:
+      return fetchUserDataFail(state, action);
 
     default:
       return state;
