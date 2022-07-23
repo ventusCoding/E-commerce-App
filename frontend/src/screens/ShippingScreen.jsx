@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import FormContainer from "../components/FormContainer";
+import CheckoutSteps from "../components/CheckoutSteps";
 
 import { useSelector, useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -18,8 +19,7 @@ const ShippingScreen = () => {
   const [postalCode, setPostalCode] = useState(shippingAdress.postalCode || "");
   const [country, setCountry] = useState(shippingAdress.country || "");
 
-  useEffect(() => {
-  }, [shippingAdress]);
+  useEffect(() => {}, [shippingAdress]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -28,6 +28,7 @@ const ShippingScreen = () => {
 
   return (
     <FormContainer>
+      <CheckoutSteps step1 step2 />
       <h1>Shipping</h1>
       <Form
         onSubmit={(e) => {
