@@ -19,7 +19,6 @@ const ShippingScreen = () => {
   const [country, setCountry] = useState(shippingAdress.country || "");
 
   useEffect(() => {
-    console.log("aa:" ,shippingAdress);
   }, [shippingAdress]);
 
   const submitHandler = (e) => {
