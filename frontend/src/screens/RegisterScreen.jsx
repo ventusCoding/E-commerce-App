@@ -21,7 +21,11 @@ const RegisterScreen = () => {
 
   const dispatch = useDispatch();
 
-  const { signup } = bindActionCreators(actionCreators, dispatch);
+  const { signup,resetAuthState } = bindActionCreators(actionCreators, dispatch);
+
+  useEffect(() => {
+    resetAuthState()
+  }, []);
 
   return (
     <FormContainer>

@@ -7,7 +7,7 @@ import FormContainer from "../components/FormContainer";
 import { useSelector, useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as actionCreators from "../store/actions/index";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
@@ -20,12 +20,21 @@ const LoginScreen = () => {
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const { auth } = bindActionCreators(actionCreators, dispatch);
+  const { auth, resetAuthState } = bindActionCreators(actionCreators, dispatch);
+
+  useEffect(() => {
+    resetAuthState();
+  }, []);
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate("/");
+      if(location.search){
+        navigate('/' + location.search.split('=')[1])
+      }else{
+        navigate("/")
+      }
     }
   }, [isAuthenticated]);
 

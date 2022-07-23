@@ -19,11 +19,15 @@ const ProfileScreen = () => {
     token,
   } = useSelector((state) => state.auth);
 
-  const orderState = useSelector((state) => state.cart);
+  const {
+    loading: orderLoading,
+    error: orderError,
+    cartItems: orders,
+  } = useSelector((state) => state.cart);
 
   const dispatch = useDispatch();
 
-  const { updateUser, fetchUserData } = bindActionCreators(
+  const { updateUser, fetchUserData, resetAuthState } = bindActionCreators(
     actionCreators,
     dispatch
   );
@@ -34,6 +38,10 @@ const ProfileScreen = () => {
   useEffect(() => {
     fetchUserData(userId, token);
   }, [userId]);
+
+  useEffect(() => {
+    resetAuthState();
+  }, []);
 
   return (
     <Row>
@@ -67,7 +75,7 @@ const ProfileScreen = () => {
               ></Form.Control>
             </Form.Group>
 
-            <Form.Group style={{ marginTop: 20 }} controlId="password">
+            <Form.Group style={{ marginTop: 20 }} controlId="passwordCurrent">
               <Form.Label>Current Password</Form.Label>
               <Form.Control
                 type="password"
@@ -102,24 +110,24 @@ const ProfileScreen = () => {
       </Col>
       <Col md={9}>
         <h2>My Orders</h2>
-        {/* {loadingOrders ? (
+        {orderLoading ? (
           <Loader />
-        ) : errorOrders ? (
-          <Message variant='danger'>{errorOrders}</Message>
-        ) : ( */}
-        <Table striped bordered hover responsive className="table-sm">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>DATE</th>
-              <th>TOTAL</th>
-              <th>PAID</th>
-              <th>DELIVERED</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* {orders.map((order) => (
+        ) : orderError ? (
+          <Message variant="danger">{orderError}</Message>
+        ) : (
+          <Table striped bordered hover responsive className="table-sm">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>DATE</th>
+                <th>TOTAL</th>
+                <th>PAID</th>
+                <th>DELIVERED</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {/* {orders.map((order) => (
                 <tr key={order._id}>
                   <td>{order._id}</td>
                   <td>{order.createdAt.substring(0, 10)}</td>
@@ -147,9 +155,9 @@ const ProfileScreen = () => {
                   </td>
                 </tr>
               ))} */}
-          </tbody>
-        </Table>
-        {/* )} */}
+            </tbody>
+          </Table>
+        )}
       </Col>
     </Row>
   );

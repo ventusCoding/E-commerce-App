@@ -72,9 +72,7 @@ exports.getAllUsers = catchasync(async (req, res, next) => {
     status: "success",
     requestedAt: req.requestTime,
     results: users.length,
-    data: {
-      users,
-    },
+    data: users,
   });
 });
 

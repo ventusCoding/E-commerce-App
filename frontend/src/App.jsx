@@ -14,6 +14,7 @@ import ProfileScreen from "./screens/ProfileScreen";
 import { useSelector, useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as actionCreators from "./store/actions/index";
+import ShippingScreen from "./screens/ShippingScreen";
 
 const App = () => {
   const { loading, error, isAuthenticated } = useSelector(
@@ -42,6 +43,7 @@ const App = () => {
             <Route path="/" element={<HomeScreen />} />
             <Route path="/product/:id" element={<ProductScreen />} />
             <Route path="/cart" element={<CartScreen />} />
+            <Route path="/shipping" element={<ShippingScreen />} />
             <Route path="/login" element={<LoginScreen />} />
             <Route path="/register" element={<RegisterScreen />} />
             <Route
