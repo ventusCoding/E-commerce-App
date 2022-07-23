@@ -14,6 +14,22 @@ const initialState = {
     : {},
 };
 
+//************** SAVE_SHIPPING_PAYMENT ********************/
+
+const saveShippingPayment = (state, action) => {
+  //add paymentMethode in state.shippingAdress and save in localStorage
+  console.log('saveShippingPayment');
+  console.log(action.paymentMethode);
+  const newShippingAdress = {
+    ...state.shippingAdress,
+    paymentMethode: action.paymentMethode,
+  };
+  localStorage.setItem("shippingAdress", JSON.stringify(newShippingAdress));
+  return updateObject(state, {
+    shippingAdress: newShippingAdress,
+  });
+};
+
 //************** SAVE_SHIPPING_ADDRESS ********************/
 
 const saveShippingAddress = (state, action) => {
@@ -132,6 +148,9 @@ const cartReducer = (state = initialState, action) => {
 
     case actionTypes.SAVE_SHIPPING_ADDRESS:
       return saveShippingAddress(state, action);
+
+    case actionTypes.SAVE_SHIPPING_PAYMENT:
+      return saveShippingPayment(state, action);
 
     default:
       return state;

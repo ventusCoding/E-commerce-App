@@ -8,7 +8,7 @@ import { bindActionCreators } from "redux";
 import * as actionCreators from "../store/actions/index";
 
 const ShippingScreen = () => {
-  const { loading, shippingAdress, error } = useSelector((state) => state.cart);
+  const { shippingAdress } = useSelector((state) => state.cart);
 
   const dispatch = useDispatch();
 

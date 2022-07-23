@@ -47,3 +47,6 @@ export const FETCH_PRODUCT_DETAIL_FAIL = "FETCH_PRODUCT_DETAIL_FAIL";
 
 //************** SAVE SHIPPING ADDRESS ********************/
 export const SAVE_SHIPPING_ADDRESS = "SAVE_SHIPPING_ADDRESS";
+
+//************** SAVE SHIPPING PAYMENT ********************/
+export const SAVE_SHIPPING_PAYMENT = "SAVE_SHIPPING_PAYMENT";

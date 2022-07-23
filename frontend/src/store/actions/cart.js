@@ -1,6 +1,15 @@
 import * as actionTypes from "./actionTypes";
 import axios from "axios";
 
+//************** SAVE_SHIPPING_PAYMENT ********************/
+
+export const saveShippingPayment = (paymentMethode) => {
+  return {
+    type: actionTypes.SAVE_SHIPPING_PAYMENT,
+    paymentMethode: paymentMethode,
+  };
+};
+
 //************** SAVE_SHIPPING_ADDRESS ********************/
 
 export const saveShippingAddress = (shippingAdress) => {

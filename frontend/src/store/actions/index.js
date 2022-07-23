@@ -14,6 +14,7 @@ export {
 //************** SHIPPING ********************/
 export {
   saveShippingAddress,
+  saveShippingPayment,
 } from "./cart";
 
 
