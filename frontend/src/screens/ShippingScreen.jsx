@@ -6,9 +6,11 @@ import CheckoutSteps from "../components/CheckoutSteps";
 import { useSelector, useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as actionCreators from "../store/actions/index";
+import { useNavigate } from "react-router-dom";
 
 const ShippingScreen = () => {
   const { shippingAdress } = useSelector((state) => state.cart);
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -24,6 +26,7 @@ const ShippingScreen = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     saveShippingAddress({ address, city, postalCode, country });
+    navigate("/payment");
   };
 
   return (

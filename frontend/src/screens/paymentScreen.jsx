@@ -6,19 +6,24 @@ import CheckoutSteps from "../components/CheckoutSteps";
 import { useSelector, useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as actionCreators from "../store/actions/index";
+import { useNavigate } from "react-router-dom";
 
 const PaymentScreen = () => {
   const { shippingAdress } = useSelector((state) => state.cart);
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
   const { saveShippingPayment } = bindActionCreators(actionCreators, dispatch);
 
-  const [paymentMethod, setPaymentMethod] = useState(shippingAdress.paymentMethode || "PayPal");
+  const [paymentMethod, setPaymentMethod] = useState(
+    shippingAdress.paymentMethode || "PayPal"
+  );
 
   const submitHandler = (e) => {
     e.preventDefault();
-    saveShippingPayment( paymentMethod );
+    saveShippingPayment(paymentMethod);
+    navigate("/placeorder");
   };
 
   return (
