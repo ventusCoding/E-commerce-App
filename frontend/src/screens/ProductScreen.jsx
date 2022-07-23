@@ -16,13 +16,14 @@ import { useSelector, useDispatch } from "react-redux";
 import * as actionCreators from "../store/actions/index";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const ProductScreen = () => {
   const [quantity, setQuantity] = useState(1);
 
   const { id } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const dispatch = useDispatch();
 
@@ -61,15 +62,16 @@ const ProductScreen = () => {
         <Message variant="danger">{productError}</Message>
       ) : (
         <React.Fragment>
-          <Link className="btn btn-light my-3" to={"/"}>
+          <Link
+            className="btn btn-light my-3"
+            to={location.search ? `/${location.search.split("=")[1]}` : "/"}
+          >
             Go Back
           </Link>
           <Row>
             <Col md={6}>
               <Image
-                src={`/img/products/${
-                  product.image.url
-                }`}
+                src={`/img/products/${product.image.url}`}
                 alt={product.name}
                 fluid
               />

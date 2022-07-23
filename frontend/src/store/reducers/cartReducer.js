@@ -17,12 +17,12 @@ const initialState = {
 //************** SAVE_SHIPPING_PAYMENT ********************/
 
 const saveShippingPayment = (state, action) => {
-  //add paymentMethode in state.shippingAdress and save in localStorage
+  //add paymentMethod in state.shippingAdress and save in localStorage
   console.log('saveShippingPayment');
-  console.log(action.paymentMethode);
+  console.log(action.paymentMethod);
   const newShippingAdress = {
     ...state.shippingAdress,
-    paymentMethode: action.paymentMethode,
+    paymentMethod: action.paymentMethod,
   };
   localStorage.setItem("shippingAdress", JSON.stringify(newShippingAdress));
   return updateObject(state, {

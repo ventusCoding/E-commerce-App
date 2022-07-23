@@ -3,10 +3,10 @@ import axios from "axios";
 
 //************** SAVE_SHIPPING_PAYMENT ********************/
 
-export const saveShippingPayment = (paymentMethode) => {
+export const saveShippingPayment = (paymentMethod) => {
   return {
     type: actionTypes.SAVE_SHIPPING_PAYMENT,
-    paymentMethode: paymentMethode,
+    paymentMethod: paymentMethod,
   };
 };
 

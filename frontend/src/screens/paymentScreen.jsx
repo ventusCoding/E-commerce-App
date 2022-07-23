@@ -17,7 +17,7 @@ const PaymentScreen = () => {
   const { saveShippingPayment } = bindActionCreators(actionCreators, dispatch);
 
   const [paymentMethod, setPaymentMethod] = useState(
-    shippingAdress.paymentMethode || "PayPal"
+    shippingAdress.paymentMethod || "PayPal"
   );
 
   const submitHandler = (e) => {
