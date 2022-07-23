@@ -1,6 +1,15 @@
 import * as actionTypes from "./actionTypes";
 import axios from "axios";
 
+//************** SAVE_SHIPPING_ADDRESS ********************/
+
+export const saveShippingAddress = (shippingAdress) => {
+  return {
+    type: actionTypes.SAVE_SHIPPING_ADDRESS,
+    shippingAdress: shippingAdress,
+  };
+};
+
 //************** UPDATE CART QTY ********************/
 
 export const updateCartQtySuccess = (cart) => {
@@ -109,7 +118,6 @@ export const addCart = (id, qty) => {
       const cartItem = cartItems.find((cart) => cart.id === id);
 
       if (cartItem) {
-   
         if (cartItem.countInStock < parseInt(cartItem.qty) + parseInt(qty)) {
           dispatch(addCartFail("Not enough countInStock"));
           return;

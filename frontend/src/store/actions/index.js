@@ -11,6 +11,11 @@ export {
   fetchUserData,
 } from "./auth";
 
+//************** SHIPPING ********************/
+export {
+  saveShippingAddress,
+} from "./cart";
+
 
 //************** UPDATE CART QTY ********************/
 export {

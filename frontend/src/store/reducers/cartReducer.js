@@ -9,6 +9,18 @@ const initialState = {
     : [],
   loading: false,
   error: null,
+  shippingAdress: localStorage.getItem("shippingAdress")
+    ? JSON.parse(localStorage.getItem("shippingAdress"))
+    : {},
+};
+
+//************** SAVE_SHIPPING_ADDRESS ********************/
+
+const saveShippingAddress = (state, action) => {
+  localStorage.setItem("shippingAdress", JSON.stringify(action.shippingAdress));
+  return updateObject(state, {
+    shippingAdress: action.shippingAdress,
+  });
 };
 
 //************** UPDATE CART QTY ********************/
@@ -20,14 +32,13 @@ const updateCartQtyStart = (state, action) => {
 };
 
 const updateCartQtySuccess = (state, action) => {
-//update qty in state.cartItems
+  //update qty in state.cartItems
   const newCart = state.cartItems.map((cart) => {
     if (cart.id === action.cart.id) {
       return action.cart;
     }
     return cart;
-  }
-  );
+  });
 
   localStorage.setItem("cartItems", JSON.stringify(newCart));
 
@@ -118,6 +129,9 @@ const cartReducer = (state = initialState, action) => {
       return updateCartQtySuccess(state, action);
     case actionTypes.UPDATE_CART_QTY_FAIL:
       return updateCartQtyFail(state, action);
+
+    case actionTypes.SAVE_SHIPPING_ADDRESS:
+      return saveShippingAddress(state, action);
 
     default:
       return state;
