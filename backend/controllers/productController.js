@@ -3,7 +3,7 @@ const APIFeatures = require("../utils/apiFeatures");
 const catchasync = require("../utils/catchAsync");
 const AppError = require("../utils/appError");
 
-exports.getProducts = catchasync(async (req, res, next) => {
+exports.getAllProducts = catchasync(async (req, res, next) => {
   const features = new APIFeatures(Product.find(), req.query)
     .filter()
     .sort()
