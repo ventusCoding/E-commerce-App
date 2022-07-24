@@ -15,6 +15,11 @@ const orderSchema = new mongoose.Schema(
         default: [],
       },
     ],
+    itemsPrice : {
+      type: Number,
+      required: [true, "An order must have a items price"],
+      default: 0,
+    },
     shippingAdress: {
       address: {
         type: String,

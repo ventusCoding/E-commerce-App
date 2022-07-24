@@ -1,3 +1,10 @@
+//************** ORDERS ********************/
+
+export {
+  createOrder,
+} from "./order";
+
+
 //************** AUTH_&_USER ********************/
 
 export {

@@ -1,3 +1,8 @@
+//************** CREATE ORDER ********************/
+export const CREATE_ORDER_START = "CREATE_ORDER_START";
+export const CREATE_ORDER_SUCCESS = "CREATE_ORDER_SUCCESS";
+export const CREATE_ORDER_FAIL = "CREATE_ORDER_FAIL";
+
 //************** FETCH_USER_DATA ********************/
 export const FETCH_USER_DATA_SUCCESS = "FETCH_USER_DATA_SUCCESS";
 export const FETCH_USER_DATA_FAIL = "FETCH_USER_DATA_FAIL";
