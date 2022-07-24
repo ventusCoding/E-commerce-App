@@ -54,18 +54,18 @@ exports.createOrder = catchasync(async (req, res, next) => {
     return next(new AppError("No order items found", 400));
   }
 
-  const order = new Order({
-    orderItems,
-    shippingAdress,
-    paymentMethod,
-    itemsPrice,
-    taxPrice,
-    shippingPrice,
-    totalPrice,
-    user: req.user._id,
-  });
-
-  const newOrder = await order.save();
+  const newOrder = await Order.create(
+    {
+      orderItems,
+      shippingAdress,
+      paymentMethod,
+      itemsPrice,
+      taxPrice,
+      shippingPrice,
+      totalPrice,
+      user: req.user._id,
+    }
+  );
 
   res.status(201).json({
     status: "success",

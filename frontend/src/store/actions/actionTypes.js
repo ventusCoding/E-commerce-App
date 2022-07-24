@@ -1,4 +1,8 @@
-//************** CREATE ORDER ********************/
+
+//************** RESET_ORDER_STATE ********************/
+export const RESET_ORDER_STATE = "RESET_ORDER_STATE";
+
+//************** CREATE_ORDER ********************/
 export const CREATE_ORDER_START = "CREATE_ORDER_START";
 export const CREATE_ORDER_SUCCESS = "CREATE_ORDER_SUCCESS";
 export const CREATE_ORDER_FAIL = "CREATE_ORDER_FAIL";
