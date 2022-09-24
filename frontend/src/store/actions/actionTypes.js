@@ -1,8 +1,15 @@
+//************** DELETE_USER ********************/
+export const DELETE_USER_SUCCESS = "DELETE_USER_SUCCESS";
+export const DELETE_USER_FAIL = "DELETE_USER_FAIL";
+
+//************** Get_ALL_USERS ********************/
+export const GET_ALL_USERS_SUCCESS = "GET_ALL_USERS_SUCCESS";
+export const GET_ALL_USERS_FAIL = "GET_ALL_USERS_FAIL";
+
 //************** Get_MY_ORDERS ********************/
 export const GET_MY_ORDERS_START = "GET_MY_ORDERS_START";
 export const GET_MY_ORDERS_SUCCESS = "GET_MY_ORDERS_SUCCESS";
 export const GET_MY_ORDERS_FAIL = "GET_MY_ORDERS_FAIL";
-
 
 //************** UPDATE ORDER TO PAY ********************/
 export const UPDATE_ORDER_TO_PAY_START = "UPDATE_ORDER_TO_PAY_START";
@@ -13,7 +20,6 @@ export const UPDATE_ORDER_TO_PAY_FAIL = "UPDATE_ORDER_TO_PAY_FAIL";
 export const GET_ORDER_START = "GET_ORDER_START";
 export const GET_ORDER_SUCCESS = "GET_ORDER_SUCCESS";
 export const GET_ORDER_FAIL = "GET_ORDER_FAIL";
-
 
 //************** RESET_ORDER_STATE ********************/
 export const RESET_ORDER_STATE = "RESET_ORDER_STATE";
@@ -27,11 +33,9 @@ export const CREATE_ORDER_FAIL = "CREATE_ORDER_FAIL";
 export const FETCH_USER_DATA_SUCCESS = "FETCH_USER_DATA_SUCCESS";
 export const FETCH_USER_DATA_FAIL = "FETCH_USER_DATA_FAIL";
 
-
 //************** UPDATE_USER ********************/
 export const UPDATE_USER_SUCCESS = "UPDATE_USER_SUCCESS";
 export const UPDATE_USER_FAIL = "UPDATE_USER_FAIL";
-
 
 //************** AUTH ********************/
 export const AUTH_START = "AUTH_START";
@@ -68,7 +72,6 @@ export const FETCH_PRODUCTS_FAIL = "FETCH_PRODUCTS_FAIL";
 export const FETCH_PRODUCT_DETAIL_START = "FETCH_PRODUCT_DETAIL_START";
 export const FETCH_PRODUCT_DETAIL_SUCCESS = "FETCH_PRODUCT_DETAIL_SUCCESS";
 export const FETCH_PRODUCT_DETAIL_FAIL = "FETCH_PRODUCT_DETAIL_FAIL";
-
 
 //************** SAVE SHIPPING ADDRESS ********************/
 export const SAVE_SHIPPING_ADDRESS = "SAVE_SHIPPING_ADDRESS";

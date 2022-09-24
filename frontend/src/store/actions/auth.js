@@ -1,7 +1,96 @@
 import axios from "axios";
 import * as actionTypes from "./actionTypes";
 import jwt_decode from "jwt-decode";
-import { setCookie, deleteCookie, getCookie } from "../../helpers/cookie";
+// import { setCookie, deleteCookie, getCookie } from "../../helpers/cookie";
+
+//************** DELETE_USER ********************/
+
+export const deleteUserSuccess = (id) => {
+  return {
+    type: actionTypes.DELETE_USER_SUCCESS,
+    id: id,
+  };
+};
+export const deleteUserFail = (error) => {
+  return {
+    type: actionTypes.DELETE_USER_FAIL,
+    error,
+  };
+};
+
+export const deleteUser = (token, id) => {
+  return async (dispatch) => {
+    dispatch(authStart());
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    axios
+      .delete(`/api/v1/users/${id}`, config)
+      .then(({ data: { data } }) => {
+        dispatch(deleteUserSuccess(id));
+      })
+      .catch(
+        ({
+          response: {
+            data: { message },
+          },
+        }) => {
+          console.log(message);
+          dispatch(deleteUserFail(message));
+        }
+      );
+  };
+};
+
+//************** GET_ALL_USERS ********************/
+
+export const getAllUsersSuccess = (users) => {
+  return {
+    type: actionTypes.GET_ALL_USERS_SUCCESS,
+    users,
+  };
+};
+export const getAllUsersFail = (error) => {
+  return {
+    type: actionTypes.GET_ALL_USERS_FAIL,
+    error,
+  };
+};
+
+export const getAllUsers = (token) => {
+  return async (dispatch) => {
+    dispatch(authStart());
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    axios
+      .get(`/api/v1/users`, config)
+      .then(({ data: { data } }) => {
+        console.log(data);
+        dispatch(getAllUsersSuccess(data));
+      })
+      .catch(
+        ({
+          response: {
+            data: { message },
+          },
+        }) => {
+          console.log(message);
+          dispatch(getAllUsersFail(message));
+        }
+      );
+  };
+};
 
 //************** FETCH_USER_DATA ********************/
 
@@ -47,7 +136,7 @@ export const fetchUserData = (userId, token) => {
 
 //************** UPDATE_USER_STATE ********************/
 
-export const updateUserSuccess = (user, loading, error,message) => {
+export const updateUserSuccess = (user, loading, error, message) => {
   return {
     type: actionTypes.UPDATE_USER_SUCCESS,
     user: user,
@@ -78,19 +167,25 @@ export const updateUser = (data, token) => {
     const userData = {
       email: data.email,
       name: data.name,
-    }
+    };
 
     const userPassword = {
       password: data.password,
       passwordConfirm: data.passwordConfirm,
       passwordCurrent: data.passwordCurrent,
-    }
+    };
 
-    if (data.password !== "" && data.passwordConfirm !== "" && data.passwordCurrent !== "") {
+    if (
+      data.password !== "" &&
+      data.passwordConfirm !== "" &&
+      data.passwordCurrent !== ""
+    ) {
       axios
         .patch(`/api/v1/users/updateMyPassword`, userPassword, config)
         .then(({ data: { data } }) => {
-          dispatch(updateUserSuccess(data, false, null, "Profile updated successfully"));
+          dispatch(
+            updateUserSuccess(data, false, null, "Profile updated successfully")
+          );
         })
         .catch((error) => {
           dispatch(updateUserFail(error.response.data.message));
@@ -101,7 +196,9 @@ export const updateUser = (data, token) => {
       axios
         .patch(`/api/v1/users/updateMe`, userData, config)
         .then(({ data: { data } }) => {
-          dispatch(updateUserSuccess(data, false, null , "Profile updated successfully"));
+          dispatch(
+            updateUserSuccess(data, false, null, "Profile updated successfully")
+          );
         })
         .catch((error) => {
           dispatch(updateUserFail(error.response.data.message));
@@ -155,7 +252,8 @@ export const auth = (email, password) => {
     axios
       .post(`/api/v1/users/login`, authData, config)
       .then((res) => {
-        setCookie("jwt", res.data.token, { expires: 90 });
+        // setCookie("jwt", res.data.token, { expires: 90 });
+        localStorage.setItem("jwt", res.data.token);
 
         let loadedUser = {};
         loadedUser.name = res.data.data.name;
@@ -174,7 +272,8 @@ export const auth = (email, password) => {
 //************** LOGOUT ********************/
 
 export const logout = () => {
-  deleteCookie("jwt");
+  // deleteCookie("jwt");
+  localStorage.removeItem("jwt");
   return {
     type: actionTypes.AUTH_LOGOUT,
   };
@@ -231,7 +330,8 @@ export const emailVerification = (token) => {
 export const checkAuthState = () => {
   return (dispatch) => {
     dispatch(authStart());
-    const token = getCookie("jwt");
+    // const token = getCookie("jwt");
+    const token = localStorage.getItem("jwt");
 
     if (token) {
       const decoded = jwt_decode(token);

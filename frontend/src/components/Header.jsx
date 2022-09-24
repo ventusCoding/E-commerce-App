@@ -53,6 +53,34 @@ const Header = () => {
                   Sign In
                 </Nav.Link>
               )}
+
+              {user && user.role === "admin" && (
+                <NavDropdown title="Admin" id="adminmenu">
+                  <NavDropdown.Item
+                    onClick={() => {
+                      navigate("/admin/userlist");
+                    }}
+                  >
+                    Users
+                  </NavDropdown.Item>
+
+                  <NavDropdown.Item
+                    onClick={() => {
+                      navigate("/admin/productlist");
+                    }}
+                  >
+                    Products
+                  </NavDropdown.Item>
+
+                  <NavDropdown.Item
+                    onClick={() => {
+                      navigate("/admin/orderlist");
+                    }}
+                  >
+                    Orders
+                  </NavDropdown.Item>
+                </NavDropdown>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>

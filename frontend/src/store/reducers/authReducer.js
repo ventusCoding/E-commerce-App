@@ -11,6 +11,48 @@ const initialState = {
   error: null,
   message: "",
   loading: false,
+  users: [],
+};
+
+//************** DELETE_USER ********************/
+
+export const deleteUserSuccess = (state, action) => {
+  
+  const updatedUsers = state.users.filter(
+    (user) => user._id !== action.id
+  );
+  return updateObject(state, {
+    users: updatedUsers,
+    loading: false,
+    error: null,
+  });
+};
+
+export const deleteUserFail = (state, action) => {
+  return updateObject(state, {
+    error: action.error,
+    loading: false,
+    success: false,
+  });
+};
+
+//************** GET_ALL_USERS ********************/
+
+export const getAllUsersSuccess = (state, action) => {
+  return updateObject(state, {
+    users: action.users,
+    loading: false,
+    error: null,
+    success: true,
+  });
+};
+
+export const getAllUsersFail = (state, action) => {
+  return updateObject(state, {
+    error: action.error,
+    loading: false,
+    success: false,
+  });
 };
 
 //************** FETCH_USER_DATA ********************/
@@ -110,14 +152,26 @@ const authReducer = (state = initialState, action) => {
 
     case actionTypes.RESET_AUTH_STATE:
       return resetAuthState(state, action);
+
     case actionTypes.UPDATE_USER_SUCCESS:
       return updateUserSuccess(state, action);
     case actionTypes.UPDATE_USER_FAIL:
       return updateUserFail(state, action);
+
     case actionTypes.FETCH_USER_DATA_SUCCESS:
       return fetchUserDataSuccess(state, action);
     case actionTypes.FETCH_USER_DATA_FAIL:
       return fetchUserDataFail(state, action);
+
+    case actionTypes.GET_ALL_USERS_SUCCESS:
+      return getAllUsersSuccess(state, action);
+    case actionTypes.GET_ALL_USERS_FAIL:
+      return getAllUsersFail(state, action);
+
+    case actionTypes.DELETE_USER_SUCCESS:
+      return deleteUserSuccess(state, action);
+    case actionTypes.DELETE_USER_FAIL:
+      return deleteUserFail(state, action);
 
     default:
       return state;

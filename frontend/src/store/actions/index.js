@@ -20,6 +20,8 @@ export {
   resetAuthState,
   updateUser,
   fetchUserData,
+  getAllUsers,
+  deleteUser,
 } from "./auth";
 
 //************** SHIPPING ********************/
