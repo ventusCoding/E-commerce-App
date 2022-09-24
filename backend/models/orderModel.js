@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const imageSchema = require("./imageModel");
 
 const orderSchema = new mongoose.Schema(
   {
@@ -9,13 +10,18 @@ const orderSchema = new mongoose.Schema(
     },
     orderItems: [
       {
-        type: mongoose.Schema.ObjectId,
-        ref: "Product",
-        required: [true, "An order must Have products"],
-        default: [],
+        name: { type: String, required: true },
+        qty: { type: Number, required: true },
+        image: { type: imageSchema, required: true },
+        price: { type: Number, required: true },
+        product: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Product",
+          required: true,
+        },
       },
     ],
-    itemsPrice : {
+    itemsPrice: {
       type: Number,
       required: [true, "An order must have a items price"],
       default: 0,

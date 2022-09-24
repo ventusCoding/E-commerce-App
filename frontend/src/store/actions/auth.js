@@ -25,6 +25,8 @@ export const fetchUserData = (userId, token) => {
   return (dispatch) => {
     dispatch(authStart());
 
+    console.log("userId", userId);
+
     const config = {
       headers: {
         "Content-Type": "application/json",

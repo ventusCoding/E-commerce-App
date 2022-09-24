@@ -22,21 +22,23 @@ const ProfileScreen = () => {
   const {
     loading: orderLoading,
     error: orderError,
-    cartItems: orders,
-  } = useSelector((state) => state.cart);
+    orders: orders,
+  } = useSelector((state) => state.order);
 
   const dispatch = useDispatch();
 
-  const { updateUser, fetchUserData, resetAuthState } = bindActionCreators(
-    actionCreators,
-    dispatch
-  );
+  const { updateUser, fetchUserData, resetAuthState, getMyOrders } =
+    bindActionCreators(actionCreators, dispatch);
 
   const { register: updateUserRegister, handleSubmit: updateUserHandleSubmit } =
     useForm();
 
   useEffect(() => {
-    fetchUserData(userId, token);
+    if (userId || token) {
+      fetchUserData(userId, token);
+      getMyOrders(token);
+      console.log("orders :>> ", orders);
+    }
   }, [userId]);
 
   useEffect(() => {
@@ -127,7 +129,7 @@ const ProfileScreen = () => {
               </tr>
             </thead>
             <tbody>
-              {/* {orders.map((order) => (
+              {orders.map((order) => (
                 <tr key={order._id}>
                   <td>{order._id}</td>
                   <td>{order.createdAt.substring(0, 10)}</td>
@@ -154,7 +156,7 @@ const ProfileScreen = () => {
                     </LinkContainer>
                   </td>
                 </tr>
-              ))} */}
+              ))}
             </tbody>
           </Table>
         )}

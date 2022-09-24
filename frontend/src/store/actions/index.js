@@ -3,6 +3,9 @@
 export {
   createOrder,
   resetOrderState,
+  getOrder,
+  updateOrderToPay,
+  getMyOrders,
 } from "./order";
 
 

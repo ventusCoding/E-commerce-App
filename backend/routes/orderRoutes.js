@@ -10,6 +10,11 @@ router
   .get(authController.protect, orderController.getAllOrders)
   .post(authController.protect, orderController.createOrder);
 
+router.route("/myorders").get(authController.protect, orderController.getUserOrders);
+
 router.route("/:id").get(authController.protect, orderController.getOrderById);
+router
+  .route("/:id/pay")
+  .patch(authController.protect, orderController.updateOrderToPaid);
 
 module.exports = router;

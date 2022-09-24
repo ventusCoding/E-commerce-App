@@ -17,6 +17,7 @@ import * as actionCreators from "./store/actions/index";
 import ShippingScreen from "./screens/ShippingScreen";
 import PaymentScreen from "./screens/PaymentScreen";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
+import OrderScreen from "./screens/OrderScreen";
 
 const App = () => {
   const { loading, error, isAuthenticated } = useSelector(
@@ -33,6 +34,8 @@ const App = () => {
   useEffect(() => {
     checkAuthState();
     //remove this
+
+    console.log("aa", import.meta.env.VITE_PAYPAL_CLIENT_ID);
     console.log(state);
   }, [isAuthenticated]);
 
@@ -43,6 +46,7 @@ const App = () => {
         <Container>
           <Routes>
             <Route path="/" element={<HomeScreen />} />
+            <Route path="/order/:id" element={<OrderScreen />} />
             <Route path="/product/:id" element={<ProductScreen />} />
             <Route path="/cart" element={<CartScreen />} />
             <Route path="/shipping" element={<ShippingScreen />} />

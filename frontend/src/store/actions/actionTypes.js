@@ -1,3 +1,19 @@
+//************** Get_MY_ORDERS ********************/
+export const GET_MY_ORDERS_START = "GET_MY_ORDERS_START";
+export const GET_MY_ORDERS_SUCCESS = "GET_MY_ORDERS_SUCCESS";
+export const GET_MY_ORDERS_FAIL = "GET_MY_ORDERS_FAIL";
+
+
+//************** UPDATE ORDER TO PAY ********************/
+export const UPDATE_ORDER_TO_PAY_START = "UPDATE_ORDER_TO_PAY_START";
+export const UPDATE_ORDER_TO_PAY_SUCCESS = "UPDATE_ORDER_TO_PAY_SUCCESS";
+export const UPDATE_ORDER_TO_PAY_FAIL = "UPDATE_ORDER_TO_PAY_FAIL";
+
+//************** Get_ORDER ********************/
+export const GET_ORDER_START = "GET_ORDER_START";
+export const GET_ORDER_SUCCESS = "GET_ORDER_SUCCESS";
+export const GET_ORDER_FAIL = "GET_ORDER_FAIL";
+
 
 //************** RESET_ORDER_STATE ********************/
 export const RESET_ORDER_STATE = "RESET_ORDER_STATE";
