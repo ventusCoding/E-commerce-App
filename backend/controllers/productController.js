@@ -38,3 +38,37 @@ exports.getProductById = catchasync(async (req, res, next) => {
 
   res.status(200).json({ status: "success", data: product });
 });
+
+exports.createProduct = catchasync(async (req, res, next) => {
+  const product = req.body;
+
+  product.user = req.user.id;
+
+  newProduct = await Product.create(product);
+
+  res.status(201).json({ status: "success", data: newProduct });
+});
+
+exports.updateProduct = catchasync(async (req, res, next) => {
+  const product = await Product.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+  });
+
+  if (!product) {
+    return next(new AppError("No product found with that ID", 404));
+  }
+
+  res.status(200).json({ status: "success", data: product });
+});
+
+exports.deleteProduct = catchasync(async (req, res, next) => {
+  console.log("aadelte  product");
+  const product = await Product.findByIdAndDelete(req.params.id);
+
+  if (!product) {
+    return next(new AppError("No product found with that ID", 404));
+  }
+
+  res.status(204).json({ status: "success", data: null });
+});

@@ -6,8 +6,8 @@ export {
   getOrder,
   updateOrderToPay,
   getMyOrders,
+  getAllOrders,
 } from "./order";
-
 
 //************** AUTH_&_USER ********************/
 
@@ -25,11 +25,7 @@ export {
 } from "./auth";
 
 //************** SHIPPING ********************/
-export {
-  saveShippingAddress,
-  saveShippingPayment,
-} from "./cart";
-
+export { saveShippingAddress, saveShippingPayment } from "./cart";
 
 //************** UPDATE CART QTY ********************/
 export {
@@ -39,7 +35,6 @@ export {
   updateCartQtySuccess,
 } from "./cart";
 
-
 //************** REMOVE CART ********************/
 export {
   removeCart,
@@ -48,29 +43,52 @@ export {
   removeCartSuccess,
 } from "./cart";
 
-
 //************** ADD CART ********************/
-export {
-  addCart,
-  addCartFail,
-  addCartStart,
-  addCartSuccess,
-} from "./cart";
-
+export { addCart, addCartFail, addCartStart, addCartSuccess } from "./cart";
 
 //************** FETCH PRODUCTS ********************/
 export {
-    fetchProducts,
-    fetchProductsFail,
-    fetchProductsStart,
-    fetchProductsSuccess,
-  } from "./products";
+  fetchProducts,
+  fetchProductsFail,
+  fetchProductsStart,
+  fetchProductsSuccess,
+} from "./products";
 
-  //************** FETCH PRODUCT BY ID ********************/
+//************** FETCH PRODUCT BY ID ********************/
 
-  export {
-    fetchProductDetail,
-    fetchProductDetailFail,
-    fetchProductDetailStart,
-    fetchProductDetailSuccess,
-  } from "./products";
+export {
+  fetchProductDetail,
+  fetchProductDetailFail,
+  fetchProductDetailStart,
+  fetchProductDetailSuccess,
+} from "./products";
+
+//************** DELETE PRODUCT ********************/
+
+export {
+  deleteProduct,
+  deleteProductFail,
+  deleteProductStart,
+  deleteProductSuccess,
+} from "./products";
+
+//************** UPDATE PRODUCT ********************/
+
+export {
+  updateProduct,
+  updateProductFail,
+  updateProductStart,
+  updateProductSuccess,
+} from "./products";
+
+//************** CREATE PRODUCT ********************/
+
+export {
+  createProduct,
+  createProductFail,
+  createProductStart,
+  createProductSuccess,
+} from "./products";
+
+
+

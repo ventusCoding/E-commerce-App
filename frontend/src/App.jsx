@@ -19,6 +19,11 @@ import PaymentScreen from "./screens/PaymentScreen";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 import OrderScreen from "./screens/OrderScreen";
 import UserListScreen from "./screens/UserListScreen";
+import UserEditScreen from "./screens/UserEditScreen";
+import ProductListScreen from "./screens/ProductListScreen";
+import ProductEditScreen from "./screens/ProductEditScreen";
+import ProductCreateScreen from "./screens/ProductCreateScreen";
+import AdminOrderListScreen from "./screens/AdminOrderListScreen";
 
 const App = () => {
   const { loading, error, isAuthenticated } = useSelector(
@@ -61,6 +66,10 @@ const App = () => {
             />
             <Route path="/profile" element={<ProfileScreen />} />
             <Route path="/admin/userlist" element={<UserListScreen />} />
+            <Route path='/admin/product/:id/edit' element={<ProductEditScreen />} />
+            <Route path='/admin/product/createNewProduct' element={<ProductCreateScreen />} />
+            <Route path='/admin/productlist' element={<ProductListScreen />} />
+            <Route path='/admin/orderlist' element={<AdminOrderListScreen />} />
             {/* Optional params Methode 1 */
             /* <Route path="/cart" element={<CartScreen />}>
               <Route path=":id" element={<CartScreen />} />

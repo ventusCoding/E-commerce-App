@@ -94,6 +94,26 @@ exports.deleteUserByAdmin = catchasync(async (req, res, next) => {
   });
 });
 
+exports.updateUserByAdmin = catchasync(async (req, res, next) => {
+  const filteredBody = filterObj(req.body, "name", "email", "role");
+
+  //TODO update image
+
+  const updatedUser = await User.findByIdAndUpdate(
+    req.params.id,
+    filteredBody,
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
+
+  res.status(200).json({
+    status: "success",
+    data: updatedUser,
+  });
+});
+
 exports.updateMe = catchasync(async (req, res, next) => {
   if (req.body.password || req.body.passwordConfirm) {
     return next(

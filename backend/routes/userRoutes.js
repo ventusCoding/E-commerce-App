@@ -31,6 +31,15 @@ router.patch(
   userController.updateMe
 );
 
+router.patch(
+  "/updateUserByAdmin/:id",
+  authController.protect,
+  authController.restrictTo("admin"),
+  userController.uploadUserPhoto,
+  userController.resizeUserPhoto,
+  userController.updateUserByAdmin
+);
+
 router
   .route("/:id")
   .get(

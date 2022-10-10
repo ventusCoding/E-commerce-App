@@ -3,6 +3,24 @@ const APIFeatures = require("../utils/apiFeatures");
 const catchasync = require("../utils/catchAsync");
 const AppError = require("../utils/appError");
 
+exports.updateOrderToDeliver = catchasync(async (req, res, next) => {
+  const order = await Order.findById(req.params.id);
+
+  if (order) {
+    order.isDelivered = true;
+    order.deliveredAt = Date.now();
+
+    const updatedOrder = await order.save();
+
+    res.status(200).json({
+      status: "success",
+      data: updatedOrder,
+    });
+  } else {
+    return next(new AppError("Order not found", 404));
+  }
+});
+
 exports.getAllOrders = catchasync(async (req, res, next) => {
   const features = new APIFeatures(Order.find(), req.query)
     .filter()

@@ -8,6 +8,56 @@ export const resetOrderState = () => {
   };
 };
 
+//************** GET ALL ORDERS ********************/
+
+export const getAllOrdersSuccess = (orders) => {
+  return {
+    type: actionTypes.GET_ALL_ORDERS_SUCCESS,
+    orders,
+  };
+};
+export const getAllOrdersFail = (error) => {
+  return {
+    type: actionTypes.GET_ALL_ORDERS_FAIL,
+    error,
+  };
+};
+export const getAllOrdersStart = () => {
+  return {
+    type: actionTypes.GET_ALL_ORDERS_START,
+  };
+};
+
+export const getAllOrders = (token) => {
+  return async (dispatch) => {
+    dispatch(getAllOrdersStart());
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    axios
+      .get(`/api/v1/orders`, config)
+      .then(({ data: { data } }) => {
+        console.log(data);
+        dispatch(getAllOrdersSuccess(data));
+      })
+      .catch(
+        ({
+          response: {
+            data: { message },
+          },
+        }) => {
+          console.log(message);
+          dispatch(getAllOrdersFail(message));
+        }
+      );
+  };
+};
+
 //************** GET MY ORDERS ********************/
 
 export const getMyOrdersSuccess = (orders) => {

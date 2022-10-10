@@ -29,6 +29,33 @@ const resetOrderState = (state, action) => {
   });
 };
 
+//************** GET_ALL_ORDERS ********************/
+
+export const getAllOrdersSuccess = (state, action) => {
+  return updateObject(state, {
+    orders: action.orders,
+    loading: false,
+    error: null,
+    success: true,
+  });
+};
+
+export const getAllOrdersFail = (state, action) => {
+  return updateObject(state, {
+    error: action.error,
+    loading: false,
+    success: false,
+  });
+};
+
+export const getAllOrdersStart = (state, action) => {
+  return updateObject(state, {
+    loading: true,
+    error: null,
+    success: false,
+  });
+};
+
 //************** GET_MY_ORDERS ********************/
 
 export const getMyOrdersSuccess = (state, action) => {
@@ -167,6 +194,13 @@ const orderReducer = (state = initialState, action) => {
       return getMyOrdersSuccess(state, action);
     case actionTypes.GET_MY_ORDERS_FAIL:
       return getMyOrdersFail(state, action);
+
+    case actionTypes.GET_ALL_ORDERS_START:
+      return getAllOrdersStart(state, action);
+    case actionTypes.GET_ALL_ORDERS_SUCCESS:
+      return getAllOrdersSuccess(state, action);
+    case actionTypes.GET_ALL_ORDERS_FAIL:
+      return getAllOrdersFail(state, action);
 
     case actionTypes.RESET_ORDER_STATE:
       return resetOrderState(state, action);

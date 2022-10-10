@@ -1,6 +1,152 @@
 import * as actionTypes from "./actionTypes";
 import axios from "axios";
 
+//************** CREATE PRODUCT ********************/
+
+export const createProductFail = (error) => {
+  return {
+    type: actionTypes.CREATE_PRODUCT_FAIL,
+    error,
+  };
+};
+export const createProductStart = () => {
+  return {
+    type: actionTypes.CREATE_PRODUCT_START,
+  };
+};
+
+export const createProductSuccess = () => {
+  return {
+    type: actionTypes.CREATE_PRODUCT_SUCCESS,
+  };
+};
+
+export const createProduct = (token, data) => {
+  return (dispatch) => {
+    dispatch(createProductStart());
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    axios
+      .post(`/api/v1/products/`, data, config)
+      .then(() => {
+        dispatch(createProductSuccess());
+        dispatch(fetchProducts());
+      })
+      .catch(
+        ({
+          response: {
+            data: { message },
+          },
+        }) => {
+          dispatch(createProductFail(message));
+        }
+      );
+  };
+};
+
+//************** UPDATE PRODUCT ********************/
+
+export const updateProductFail = (error) => {
+  return {
+    type: actionTypes.UPDATE_PRODUCT_FAIL,
+    error,
+  };
+};
+export const updateProductStart = () => {
+  return {
+    type: actionTypes.UPDATE_PRODUCT_START,
+  };
+};
+
+export const updateProductSuccess = () => {
+  return {
+    type: actionTypes.UPDATE_PRODUCT_SUCCESS,
+  };
+};
+
+export const updateProduct = (token, id, data) => {
+  return (dispatch) => {
+    dispatch(updateProductStart());
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    axios
+      .patch(`/api/v1/products/${id}`, data, config)
+      .then(() => {
+        dispatch(updateProductSuccess());
+      })
+      .catch(
+        ({
+          response: {
+            data: { message },
+          },
+        }) => {
+          dispatch(updateProductFail(message));
+        }
+      );
+  };
+};
+
+//************** DELETE PRODUCT ********************/
+
+export const deleteProductFail = (error) => {
+  return {
+    type: actionTypes.DELETE_PRODUCT_FAIL,
+    error,
+  };
+};
+export const deleteProductStart = () => {
+  return {
+    type: actionTypes.DELETE_PRODUCT_START,
+  };
+};
+
+export const deleteProductSuccess = () => {
+  return {
+    type: actionTypes.DELETE_PRODUCT_SUCCESS,
+  };
+};
+
+export const deleteProduct = (token, id) => {
+  return (dispatch) => {
+    dispatch(deleteProductStart());
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    axios
+      .delete(`/api/v1/products/${id}`, config)
+      .then(() => {
+        dispatch(deleteProductSuccess());
+        dispatch(fetchProducts(token));
+      })
+      .catch(
+        ({
+          response: {
+            data: { message },
+          },
+        }) => {
+          dispatch(deleteProductFail(message));
+        }
+      );
+  };
+};
+
 //************** FETCH PRODUCT BY ID ********************/
 
 export const fetchProductDetailSuccess = (product) => {

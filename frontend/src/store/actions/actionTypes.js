@@ -6,6 +6,11 @@ export const DELETE_USER_FAIL = "DELETE_USER_FAIL";
 export const GET_ALL_USERS_SUCCESS = "GET_ALL_USERS_SUCCESS";
 export const GET_ALL_USERS_FAIL = "GET_ALL_USERS_FAIL";
 
+//************** Get_ALL_ORDERS ********************/
+export const GET_ALL_ORDERS_START = "GET_ALL_ORDERS_START";
+export const GET_ALL_ORDERS_SUCCESS = "GET_ALL_ORDERS_SUCCESS";
+export const GET_ALL_ORDERS_FAIL = "GET_ALL_ORDERS_FAIL";
+
 //************** Get_MY_ORDERS ********************/
 export const GET_MY_ORDERS_START = "GET_MY_ORDERS_START";
 export const GET_MY_ORDERS_SUCCESS = "GET_MY_ORDERS_SUCCESS";
@@ -62,6 +67,21 @@ export const REMOVE_CART_FAIL = "REMOVE_CART_FAIL";
 export const ADD_CART_START = "ADD_CART_START";
 export const ADD_CART_SUCCESS = "ADD_CART_SUCCESS";
 export const ADD_CART_FAIL = "ADD_CART_FAIL";
+
+//************** UPDATE PRODUCT ********************/
+export const UPDATE_PRODUCT_START = "UPDATE_PRODUCT_START";
+export const UPDATE_PRODUCT_SUCCESS = "UPDATE_PRODUCT_SUCCESS";
+export const UPDATE_PRODUCT_FAIL = "UPDATE_PRODUCT_FAIL";
+
+//************** CREATE PRODUCT ********************/
+export const CREATE_PRODUCT_START = "CREATE_PRODUCT_START";
+export const CREATE_PRODUCT_SUCCESS = "CREATE_PRODUCT_SUCCESS";
+export const CREATE_PRODUCT_FAIL = "CREATE_PRODUCT_FAIL";
+
+//************** DELETE PRODUCT ********************/
+export const DELETE_PRODUCT_START = "DELETE_PRODUCT_START";
+export const DELETE_PRODUCT_SUCCESS = "DELETE_PRODUCT_SUCCESS";
+export const DELETE_PRODUCT_FAIL = "DELETE_PRODUCT_FAIL";
 
 //************** FETCH PRODUCTS ********************/
 export const FETCH_PRODUCTS_START = "FETCH_PRODUCTS_START";

@@ -15,7 +15,7 @@ const productSchema = new mongoose.Schema(
     image: {
       type: imageSchema,
       default: {
-        url: "no-image.jpg",
+        url: "no-image.png",
         isExternal: false,
       },
     },
