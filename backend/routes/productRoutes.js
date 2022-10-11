@@ -2,6 +2,7 @@ const express = require("express");
 
 const productController = require("../controllers/productController");
 const authController = require("../controllers/authController");
+const uploadController = require('../controllers/uploadController');
 
 const router = express.Router();
 
@@ -11,6 +12,8 @@ router
   .post(
     authController.protect,
     authController.restrictTo("admin"),
+    uploadController.uploadProductImages,
+    uploadController.resizeProductImages,
     productController.createProduct
   );
 
@@ -20,6 +23,8 @@ router
   .patch(
     authController.protect,
     authController.restrictTo("admin"),
+    uploadController.uploadProductImages,
+    uploadController.resizeProductImages,
     productController.updateProduct
   )
   .delete(
