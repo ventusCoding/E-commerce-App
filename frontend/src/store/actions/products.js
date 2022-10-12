@@ -32,8 +32,26 @@ export const createProduct = (token, data) => {
       },
     };
 
+    const formData = new FormData();
+
+    formData.append("name", data.name);
+    formData.append("price", data.price);
+    formData.append("brand", data.brand);
+    formData.append("category", data.category);
+    formData.append("description", data.description);
+    formData.append("countInStock", data.countInStock);
+    if (data.imageFile) {
+      formData.append("image", data.imageFile);
+    } else if (
+      data.image !== null &&
+      data.image !== undefined &&
+      data.image !== ""
+    ) {
+      formData.append("image", data.image);
+    }
+
     axios
-      .post(`/api/v1/products/`, data, config)
+      .post(`/api/v1/products/`, formData, config)
       .then(() => {
         dispatch(createProductSuccess());
         dispatch(fetchProducts());
@@ -81,8 +99,26 @@ export const updateProduct = (token, id, data) => {
       },
     };
 
+    const formData = new FormData();
+
+    formData.append("name", data.name);
+    formData.append("price", data.price);
+    formData.append("brand", data.brand);
+    formData.append("category", data.category);
+    formData.append("description", data.description);
+    formData.append("countInStock", data.countInStock);
+    if (data.imageFile) {
+      formData.append("image", data.imageFile);
+    } else if (
+      data.image !== null &&
+      data.image !== undefined &&
+      data.image !== ""
+    ) {
+      formData.append("image", data.image);
+    }
+
     axios
-      .patch(`/api/v1/products/${id}`, data, config)
+      .patch(`/api/v1/products/${id}`, formData, config)
       .then(() => {
         dispatch(updateProductSuccess());
       })

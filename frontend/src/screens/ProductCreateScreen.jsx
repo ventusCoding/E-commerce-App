@@ -17,6 +17,7 @@ const ProductCreateScreen = () => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [image, setImage] = useState("");
+  const [imageFile, setImageFile] = useState();
   const [brand, setBrand] = useState("");
   const [category, setCategory] = useState("");
   const [countInStock, setCountInStock] = useState(0);
@@ -47,6 +48,8 @@ const ProductCreateScreen = () => {
       category,
       description,
       countInStock,
+      image,
+      imageFile,
     };
 
     createProduct(token, data);
@@ -107,16 +110,15 @@ const ProductCreateScreen = () => {
             <img
               style={{ margin: "10px 0" }}
               width={150}
-              src={`/img/products/${image.url}`}
-              alt={'No image'}
+              src={imageFile ? URL.createObjectURL(imageFile) : 'https://via.placeholder.com/150'}
+              alt={"No image"}
             />
-            {/* <Form.File
-                id="image-file"
-                label="Choose File"
-                custom
-                onChange={uploadFileHandler}
-              ></Form.File>
-              {uploading && <Loader />} */}
+
+            <input
+              type="file"
+              onChange={(e) => setImageFile(e.target.files[0])}
+              multiple={false}
+            />
           </Form.Group>
 
           <Form.Group controlId="brand">

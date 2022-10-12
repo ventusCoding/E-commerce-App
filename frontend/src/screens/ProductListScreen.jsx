@@ -85,7 +85,7 @@ const ProductListScreen = () => {
                     <img
                       width={100}
                       variant="top"
-                      src={`/img/products/${product.image.url}`}
+                      src={product.image.isExternal ? product.image.url :`/img/products/${product.image.url}`}
                     />
                   </td>
                   <td>{product.name}</td>

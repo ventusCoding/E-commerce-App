@@ -19,6 +19,7 @@ const ProductEditScreen = () => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [image, setImage] = useState("");
+  const [imageFile, setImageFile] = useState();
   const [brand, setBrand] = useState("");
   const [category, setCategory] = useState("");
   const [countInStock, setCountInStock] = useState(0);
@@ -80,6 +81,8 @@ const ProductEditScreen = () => {
       category,
       description,
       countInStock,
+      image,
+      imageFile,
     };
     updateProduct(token, id, data);
   };
@@ -137,7 +140,18 @@ const ProductEditScreen = () => {
               <img
                 style={{ margin: "10px 0" }}
                 width={150}
-                src={`/img/products/${image.url}`}
+                src={
+                  imageFile
+                    ? URL.createObjectURL(imageFile)
+                    : image.isExternal
+                    ? image.url
+                    : `/img/products/${image.url}`
+                }
+              />
+              <input
+                type="file"
+                onChange={(e) => setImageFile(e.target.files[0])}
+                multiple={false}
               />
               {/* <Form.File
                 id="image-file"

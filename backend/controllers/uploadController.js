@@ -47,6 +47,8 @@ exports.uploadProductImages = upload.fields([
 ]);
 
 exports.resizeProductImages = catchasync(async (req, res, next) => {
+  if (!req.files) return next();
+
   // 1)  image
   if (req.files.image) {
     req.body.imageFile = `product-${uuidv4()}-${Date.now()}.jpeg`;

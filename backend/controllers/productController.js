@@ -2,7 +2,7 @@ const Product = require("../models/productModel");
 const APIFeatures = require("../utils/apiFeatures");
 const catchasync = require("../utils/catchAsync");
 const AppError = require("../utils/appError");
-const imageSchema = require('../models/imageModel');
+const imageSchema = require("../models/imageModel");
 
 exports.getAllProducts = catchasync(async (req, res, next) => {
   const features = new APIFeatures(Product.find(), req.query)
@@ -89,7 +89,7 @@ exports.updateProduct = catchasync(async (req, res, next) => {
   var product = await Product.findById(req.params.id);
 
   if (!product) {
-    return next(new AppError('No product found with that ID', 404));
+    return next(new AppError("No product found with that ID", 404));
   }
 
   product.name = req.body.name;
@@ -122,10 +122,10 @@ exports.updateProduct = catchasync(async (req, res, next) => {
 
     //add images  to product images
     if (product.images) {
-      console.log('found images');
+      console.log("found images");
       product.images = product.images.concat(images);
     } else {
-      console.log('no images');
+      console.log("no images");
       product.images = images;
     }
   } else if (req.body.images) {
@@ -138,10 +138,10 @@ exports.updateProduct = catchasync(async (req, res, next) => {
     });
 
     if (product.images) {
-      console.log('found images');
+      console.log("found images");
       product.images = product.images.concat(images);
     } else {
-      console.log('no images');
+      console.log("no images");
       product.images = images;
     }
   }
@@ -158,13 +158,12 @@ exports.updateProduct = catchasync(async (req, res, next) => {
   );
 
   res.status(200).json({
-    status: 'success',
+    status: "success",
     data: updatedProduct,
   });
 });
 
 exports.deleteProduct = catchasync(async (req, res, next) => {
-  console.log("aadelte  product");
   const product = await Product.findByIdAndDelete(req.params.id);
 
   if (!product) {
