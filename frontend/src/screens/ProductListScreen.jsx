@@ -38,11 +38,11 @@ const ProductListScreen = () => {
 
   useEffect(() => {
     if (user && user.role === "admin") {
-      fetchProducts(token);
+      fetchProducts();
     } else {
       navigate("/login");
     }
-  }, []);
+  }, [products.length]);
 
   return (
     <>
@@ -51,7 +51,12 @@ const ProductListScreen = () => {
           <h1>Products</h1>
         </Col>
         <Col className="text-right">
-          <Button className="my-3" onClick={() => {navigate('/admin/product/createNewProduct')}}>
+          <Button
+            className="my-3"
+            onClick={() => {
+              navigate("/admin/product/createNewProduct");
+            }}
+          >
             <i className="fas fa-plus"></i> Create Product
           </Button>
         </Col>
@@ -85,7 +90,11 @@ const ProductListScreen = () => {
                     <img
                       width={100}
                       variant="top"
-                      src={product.image.isExternal ? product.image.url :`/img/products/${product.image.url}`}
+                      src={
+                        product.image.isExternal
+                          ? product.image.url
+                          : `/img/products/${product.image.url}`
+                      }
                     />
                   </td>
                   <td>{product.name}</td>

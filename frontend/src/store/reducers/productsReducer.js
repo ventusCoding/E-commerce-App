@@ -10,6 +10,7 @@ const initialState = {
   product: {},
   message: null,
   success: false,
+  pages: 0,
 };
 
 //************** CREATE PRODUCT ********************/
@@ -132,6 +133,7 @@ const fetchProductsStart = (state, action) => {
 const fetchProductsSuccess = (state, action) => {
   return updateObject(state, {
     products: action.products,
+    pages: action.pages,
     loading: false,
     success: false,
   });

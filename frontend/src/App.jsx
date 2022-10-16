@@ -70,6 +70,9 @@ const App = () => {
             <Route path='/admin/product/createNewProduct' element={<ProductCreateScreen />} />
             <Route path='/admin/productlist' element={<ProductListScreen />} />
             <Route path='/admin/orderlist' element={<AdminOrderListScreen />} />
+            <Route path='/search/:keyword' element={<HomeScreen />} />
+            <Route path='/page/:pageNumber' element={<HomeScreen />} />
+            <Route path='/search/:keyword/page/:pageNumber' element={<HomeScreen />} />
             {/* Optional params Methode 1 */
             /* <Route path="/cart" element={<CartScreen />}>
               <Route path=":id" element={<CartScreen />} />

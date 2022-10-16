@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as actionCreators from "../store/actions/index";
 import { useNavigate } from "react-router-dom";
+import SearchBox from "./SearchBox";
 
 const Header = () => {
   const { isAuthenticated, user } = useSelector((state) => state.auth);
@@ -24,6 +25,7 @@ const Header = () => {
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
+            <SearchBox />
             <Nav className="ms-auto">
               <Nav.Link as={Link} to="/cart">
                 <i className="fas fa-shopping-cart" /> Cart

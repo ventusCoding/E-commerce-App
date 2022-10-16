@@ -40,14 +40,12 @@ const productSchema = new mongoose.Schema(
       maxlength: [500, "Description cannot be more than 500 characters"],
       minlength: [10, "Description cannot be less than 10 characters"],
     },
-    rating: {
+    ratingsAverage: {
       type: Number,
-      required: [true, "A Product must Have a rating"],
       default: 0,
     },
     numReviews: {
       type: Number,
-      required: [true, "A Product must Have a count in number of reviews"],
       default: 0,
     },
     price: {
@@ -66,6 +64,12 @@ const productSchema = new mongoose.Schema(
     toObject: { virtuals: true },
   }
 );
+
+productSchema.virtual("reviews", {
+  ref: "Review",
+  foreignField: "product",
+  localField: "_id",
+});
 
 const Product = mongoose.model("Product", productSchema);
 

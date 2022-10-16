@@ -11,6 +11,23 @@ exports.getAllProducts = catchasync(async (req, res, next) => {
     .limitFields()
     .paginate();
 
+  let pages = 1;
+
+  if (req.query.limit) {
+    const pageSize = parseInt(req.query.limit);
+    let count;
+
+    // console.log(req.query);
+
+    if (req.query.name) {
+      const keyword = req.query.name;
+      count = await Product.countDocuments({ name: { $regex: keyword } });
+    } else {
+      count = await Product.countDocuments();
+    }
+    pages = Math.ceil(count / pageSize);
+  }
+
   const products = await features.query;
 
   if (products.length > 0) {
@@ -18,11 +35,13 @@ exports.getAllProducts = catchasync(async (req, res, next) => {
       status: "success",
       requestedAt: req.requestTime,
       results: products.length,
+      pages,
       data: products,
     });
   } else {
     res.status(404).json({
       status: "fail",
+      pages : 0,
       results: 0,
       data: products,
       message: "No Data Found!",
@@ -31,7 +50,7 @@ exports.getAllProducts = catchasync(async (req, res, next) => {
 });
 
 exports.getProductById = catchasync(async (req, res, next) => {
-  const product = await Product.findById(req.params.id);
+  const product = await Product.findById(req.params.id).populate("reviews");
 
   if (!product) {
     return next(new AppError("No product found with that ID", 404));

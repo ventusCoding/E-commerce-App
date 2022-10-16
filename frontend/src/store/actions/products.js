@@ -227,10 +227,11 @@ export const fetchProductDetail = (id) => {
 
 //************** FETCH PRODUCTS ********************/
 
-export const fetchProductsSuccess = (products) => {
+export const fetchProductsSuccess = ({ data, pages }) => {
   return {
     type: actionTypes.FETCH_PRODUCTS_SUCCESS,
-    products,
+    products: data,
+    pages,
   };
 };
 
@@ -246,13 +247,35 @@ export const fetchProductsStart = () => {
   };
 };
 
-export const fetchProducts = () => {
+export const fetchProducts = (limit, keyword, page) => {
   return (dispatch) => {
     dispatch(fetchProductsStart());
 
+    console.log(keyword, page);
+
+    let url = `/api/v1/products`;
+
+    if (limit) {
+      url += `?limit=${limit}`;
+
+      if (keyword) {
+        url = url + `&name=${keyword}`;
+      }
+
+      if (page) {
+        url = url + `&page=${page}`;
+      }
+    }
+
+    if (keyword && !limit) {
+      url = `/api/v1/products?name=${keyword}`;
+    }
+
+    console.log('final url is : ', url);
+
     axios
-      .get("/api/v1/products")
-      .then(({ data: { data } }) => {
+      .get(url)
+      .then(({ data }) => {
         dispatch(fetchProductsSuccess(data));
       })
       .catch(
