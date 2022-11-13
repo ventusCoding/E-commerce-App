@@ -281,9 +281,29 @@ export const logout = () => {
 
 //************** SIGNUP ********************/
 
+export const signupStart = () => {
+  return {
+    type: actionTypes.SIGNUP_START,
+  };
+};
+
+export const signupSuccess = (message) => {
+  return {
+    type: actionTypes.SIGNUP_SUCCESS,
+    message,
+  };
+};
+
+export const signupFail = (error) => {
+  return {
+    type: actionTypes.SIGNUP_FAIL,
+    error,
+  };
+};
+
 export const signup = (data) => {
   return (dispatch) => {
-    dispatch(authStart());
+    dispatch(signupStart());
 
     const formData = new FormData();
 
@@ -299,10 +319,11 @@ export const signup = (data) => {
     axios
       .post(`/api/v1/users/signup`, formData, config)
       .then((res) => {
-        dispatch(authSuccessMessage(res.data.message));
+        console.log("res", res.data.message);
+        dispatch(signupSuccess(res.data.message));
       })
       .catch(function (error) {
-        dispatch(authFail(error.response.data.message));
+        dispatch(signupFail(error.response.data.message));
       });
   };
 };

@@ -17,10 +17,7 @@ const initialState = {
 //************** DELETE_USER ********************/
 
 export const deleteUserSuccess = (state, action) => {
-  
-  const updatedUsers = state.users.filter(
-    (user) => user._id !== action.id
-  );
+  const updatedUsers = state.users.filter((user) => user._id !== action.id);
   return updateObject(state, {
     users: updatedUsers,
     loading: false,
@@ -104,6 +101,26 @@ const resetAuthState = (state, action) => {
 
 //************** AUTH ********************/
 
+const signupStart = (state, action) => {
+  return updateObject(state, { error: null, loading: true });
+};
+
+const signupSuccess = (state, action) => {
+  return updateObject(state, {
+    message: action.message,
+    loading: false,
+    error: null,
+  });
+};
+
+const signupFail = (state, action) => {
+  return updateObject(state, {
+    error: action.error,
+    loading: false,
+    message: "",
+  });
+};
+
 const authStart = (state, action) => {
   return updateObject(state, { error: null, loading: true });
 };
@@ -149,6 +166,13 @@ const authReducer = (state = initialState, action) => {
       return authFail(state, action);
     case actionTypes.AUTH_LOGOUT:
       return authLogout(state, action);
+
+    case actionTypes.SIGNUP_START:
+      return signupStart(state, action);
+    case actionTypes.SIGNUP_SUCCESS:
+      return signupSuccess(state, action);
+    case actionTypes.SIGNUP_FAIL:
+      return signupFail(state, action);
 
     case actionTypes.RESET_AUTH_STATE:
       return resetAuthState(state, action);
